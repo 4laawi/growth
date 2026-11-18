@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --color-background: #ffffff;
+    --color-foreground: #141517;
+    --color-muted-foreground: #52525b;
+    --color-border: #e5e7eb;
+    --color-primary: #0D5FF9;
+    --theme-transition-duration: 500ms;
+    --theme-transition-easing: ease-out;
+  }
+
+  :root.dark {
+    --color-background: #050505;
+    --color-foreground: #ffffff;
+    --color-muted-foreground: #a1a1aa;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-primary: #0D5FF9;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+    overflow-x: hidden;
+    transition:
+      background-color var(--theme-transition-duration) var(--theme-transition-easing),
+      color var(--theme-transition-duration) var(--theme-transition-easing),
+      border-color var(--theme-transition-duration) var(--theme-transition-easing);
+  }
+
+  /* Global theme-synced transition across main app sections to prevent jarring flashes between dark and light sections */
+  [data-theme-mode],
+  main,
+  main > section,
+  main > div,
+  main > div > section,
+  main > div > footer,
+  main footer,
+  [data-theme-section] {
+    transition:
+      background-color var(--theme-transition-duration) var(--theme-transition-easing),
+      color var(--theme-transition-duration) var(--theme-transition-easing),
+      border-color var(--theme-transition-duration) var(--theme-transition-easing);
+  }
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+/* Onlines signature architectural dashed grid background */
+.bg-onlines-grid {
+  background-image:
+    linear-gradient(to right, rgba(20, 21, 23, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 21, 23, 0.055) 1px, transparent 1px);
+  background-size: 96px 96px;
+}
+
+/* Subtle dot grid for studio collages */
+.bg-onlines-dots {
+  background-image: radial-gradient(rgba(20, 21, 23, 0.14) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(6px, -8px);
+  }
+}
+
+@keyframes floatCursorA {
+  0%, 100% {
+    transform: translate(0px, 0px);
+  }
+  33% {
+    transform: translate(18px, -12px);
+  }
+  66% {
+    transform: translate(-10px, 10px);
+  }
+}
+
+@keyframes floatCursorB {
+  0%, 100% {
+    transform: translate(0px, 0px);
+  }
+  40% {
+    transform: translate(-22px, 14px);
+  }
+  80% {
+    transform: translate(12px, -8px);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-cursor-a {
+  animation: floatCursorA 9s ease-in-out infinite;
+}
+
+.animate-cursor-b {
+  animation: floatCursorB 11s ease-in-out infinite;
+}
+
