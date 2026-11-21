@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { SectionHeader, useSectionReveal } from './StudioPrimitives';
 
@@ -210,7 +210,7 @@ export function rotateTestimonialsList(
 interface TestimonialCardProps {
   position: number;
   testimonial: StaggerTestimonialItem;
-  handleMove: (steps: number) => void;
+  handleMove: (steps: number, isUserAction?: boolean) => void;
   cardSize: number;
 }
 
@@ -228,14 +228,14 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       role="button"
       tabIndex={isCenter ? 0 : -1}
       aria-label={`Adu în centru impresia de la ${authorFirstName}`}
-      onClick={() => handleMove(position)}
+      onClick={() => handleMove(position, true)}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          handleMove(position);
+          handleMove(position, true);
         }
       }}
-      className={`absolute left-1/2 top-1/2 cursor-pointer border-2 p-7 sm:p-8 transition-all duration-500 ease-out select-none ${
+      className={`absolute left-1/2 top-1/2 cursor-pointer border-2 p-7 sm:p-8 select-none will-change-transform ${
         isCenter
           ? 'z-10 bg-[#0D5FF9] text-white border-[#0D5FF9]'
           : 'z-0 bg-white dark:bg-[#131417] text-[#141517] dark:text-white border-neutral-200 dark:border-white/10 hover:border-[#0D5FF9]/50'
@@ -252,14 +252,16 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)
         `,
         boxShadow: isCenter
-          ? '0px 8px 0px 4px rgba(13, 95, 249, 0.22)'
-          : '0px 12px 30px -10px rgba(20, 21, 23, 0.06)',
+          ? '0px 14px 35px -4px rgba(13, 95, 249, 0.35), 0px 8px 0px 4px rgba(13, 95, 249, 0.22)'
+          : '0px 14px 35px -10px rgba(20, 21, 23, 0.08)',
+        transition:
+          'transform 700ms cubic-bezier(0.22, 1, 0.36, 1), background-color 700ms cubic-bezier(0.22, 1, 0.36, 1), color 700ms cubic-bezier(0.22, 1, 0.36, 1), border-color 700ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 700ms cubic-bezier(0.22, 1, 0.36, 1)',
       }}
     >
       {/* Chamfered top-right corner border line */}
       <span
         aria-hidden="true"
-        className={`absolute block origin-top-right rotate-45 transition-colors duration-500 ease-out ${
+        className={`absolute block origin-top-right rotate-45 ${
           isCenter ? 'bg-[#004AD9]' : 'bg-neutral-200 dark:bg-white/15'
         }`}
         style={{
@@ -267,6 +269,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           top: 48,
           width: SQRT_5000,
           height: 2,
+          transition: 'background-color 700ms cubic-bezier(0.22, 1, 0.36, 1)',
         }}
       />
 
@@ -278,29 +281,39 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           className="h-14 w-12 bg-neutral-100 object-cover object-top shrink-0"
           style={{
             boxShadow: isCenter ? '3px 3px 0px #004AD9' : '3px 3px 0px #141517',
+            transition: 'box-shadow 700ms cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         />
         <span
-          className={`text-[11px] font-mono-code uppercase tracking-wider transition-colors duration-500 ease-out ${
+          className={`text-[11px] font-mono-code uppercase tracking-wider ${
             isCenter ? 'text-sky-200' : 'text-[#0D5FF9] dark:text-[#7DD3FC]'
           }`}
+          style={{
+            transition: 'color 700ms cubic-bezier(0.22, 1, 0.36, 1)',
+          }}
         >
           {testimonial.contextTag}
         </span>
       </div>
 
       <h3
-        className={`text-base sm:text-[19px] font-semibold leading-[1.38] tracking-[-0.015em] transition-colors duration-500 ease-out ${
+        className={`text-base sm:text-[19px] font-semibold leading-[1.38] tracking-[-0.015em] ${
           isCenter ? 'text-white' : 'text-[#141517] dark:text-white'
         }`}
+        style={{
+          transition: 'color 700ms cubic-bezier(0.22, 1, 0.36, 1)',
+        }}
       >
         „{testimonial.testimonial}”
       </h3>
 
       <p
-        className={`absolute bottom-7 left-7 right-7 sm:bottom-8 sm:left-8 sm:right-8 mt-2 text-xs sm:text-sm italic transition-colors duration-500 ease-out ${
+        className={`absolute bottom-7 left-7 right-7 sm:bottom-8 sm:left-8 sm:right-8 mt-2 text-xs sm:text-sm italic ${
           isCenter ? 'text-white/85' : 'text-neutral-500 dark:text-neutral-400'
         }`}
+        style={{
+          transition: 'color 700ms cubic-bezier(0.22, 1, 0.36, 1)',
+        }}
       >
         — {testimonial.by}
       </p>
@@ -308,16 +321,37 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   );
 };
 
-export const StaggerTestimonials: React.FC = () => {
+export const ONBOARDING_DEMO_DELAY_MS = 1000;
+export const AUTOPLAY_INTERVAL_MS = 3000;
+
+export interface StaggerTestimonialsProps {
+  isSectionRevealed?: boolean;
+}
+
+export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
+  isSectionRevealed,
+}) => {
   const [cardSize, setCardSize] = useState(365);
   const [testimonialsList, setTestimonialsList] = useState<
     StaggerTestimonialItem[]
   >(ROGROWTH_TESTIMONIALS);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const [hasTriggeredDemo, setHasTriggeredDemo] = useState(false);
+  const [isNextHighlighted, setIsNextHighlighted] = useState(false);
+  const userInteractedRef = useRef(false);
+  const stageRef = useRef<HTMLDivElement | null>(null);
 
-  const handleMove = (steps: number) => {
+  const isSectionActive =
+    isSectionRevealed !== undefined ? isSectionRevealed : isInView;
+
+  const handleMove = useCallback((steps: number, isUserAction = false) => {
     if (steps === 0) return;
+    if (isUserAction) {
+      userInteractedRef.current = true;
+    }
     setTestimonialsList((prev) => rotateTestimonialsList(prev, steps));
-  };
+  }, []);
 
   useEffect(() => {
     const updateSize = () => {
@@ -330,6 +364,82 @@ export const StaggerTestimonials: React.FC = () => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
+  // IntersectionObserver to detect when section enters viewport (as fallback or standalone)
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setIsInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // On arrival (scrolling down and revealing the section):
+  // Automatically advance to next comment after ~1s with a subtle highlight on the Next button.
+  // This demonstrates the interaction so visitors know they can click the Next button to try it themselves.
+  useEffect(() => {
+    if (!isSectionActive || hasTriggeredDemo || userInteractedRef.current) return;
+
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    ) {
+      setHasTriggeredDemo(true);
+      return;
+    }
+
+    const demoTimer = setTimeout(() => {
+      if (userInteractedRef.current || isHovered) return;
+      if (typeof document !== 'undefined' && document.hidden) return;
+
+      setHasTriggeredDemo(true);
+      setIsNextHighlighted(true);
+      handleMove(1, false);
+
+      const unhighlightTimer = setTimeout(() => {
+        setIsNextHighlighted(false);
+      }, 900);
+
+      return () => clearTimeout(unhighlightTimer);
+    }, ONBOARDING_DEMO_DELAY_MS);
+
+    return () => clearTimeout(demoTimer);
+  }, [isSectionActive, hasTriggeredDemo, isHovered, handleMove]);
+
+  // Regular autoplay loop:
+  // After the arrival demonstration has completed (or user interacted),
+  // smoothly advances every 3 seconds.
+  // Pauses when hovered, focused, out of view, or when tab is hidden.
+  useEffect(() => {
+    if (!isSectionActive || isHovered) return;
+
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
+    if (!hasTriggeredDemo && !userInteractedRef.current) return;
+
+    const timer = setInterval(() => {
+      if (typeof document !== 'undefined' && document.hidden) return;
+      handleMove(1, false);
+    }, AUTOPLAY_INTERVAL_MS);
+
+    return () => clearInterval(timer);
+  }, [isSectionActive, isHovered, hasTriggeredDemo, handleMove, testimonialsList]);
+
   const centerIndex = testimonialsList.findIndex(
     (_, idx) => computeStaggerPosition(idx, testimonialsList.length) === 0
   );
@@ -337,10 +447,17 @@ export const StaggerTestimonials: React.FC = () => {
 
   return (
     <div
+      ref={stageRef}
       data-testid="stagger-testimonials-stage"
       data-active-by={activeItem?.by || ''}
       data-nosnippet
-      className="relative w-full overflow-hidden bg-neutral-50/70 dark:bg-white/[0.03] border-y border-neutral-200/70 dark:border-white/10 transition-colors duration-500 ease-out"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setIsHovered(false)}
+      onFocusCapture={() => setIsHovered(true)}
+      onBlurCapture={() => setIsHovered(false)}
+      className="relative w-full overflow-hidden bg-white dark:bg-transparent transition-colors duration-500 ease-out"
       style={{ height: 600 }}
     >
       {testimonialsList.map((testimonial, index) => {
@@ -359,16 +476,20 @@ export const StaggerTestimonials: React.FC = () => {
       <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5">
         <button
           type="button"
-          onClick={() => handleMove(-1)}
-          className="flex h-14 w-14 items-center justify-center text-2xl transition-colors duration-300 bg-white dark:bg-[#131417] text-[#141517] dark:text-white border-2 border-neutral-200 dark:border-white/15 hover:bg-[#0D5FF9] hover:text-white hover:border-[#0D5FF9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0D5FF9] focus-visible:ring-offset-2 cursor-pointer"
+          onClick={() => handleMove(-1, true)}
+          className="flex h-14 w-14 items-center justify-center text-2xl transition-colors duration-300 bg-white dark:bg-[#131417] text-[#141517] dark:text-white border-2 border-neutral-200 dark:border-white/15 hover:bg-[#0D5FF9] hover:text-white hover:border-[#0D5FF9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0D5FF9] focus-visible:ring-offset-2 cursor-pointer shadow-sm"
           aria-label="Impresia anterioară"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button
           type="button"
-          onClick={() => handleMove(1)}
-          className="flex h-14 w-14 items-center justify-center text-2xl transition-colors duration-300 bg-white dark:bg-[#131417] text-[#141517] dark:text-white border-2 border-neutral-200 dark:border-white/15 hover:bg-[#0D5FF9] hover:text-white hover:border-[#0D5FF9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0D5FF9] focus-visible:ring-offset-2 cursor-pointer"
+          onClick={() => handleMove(1, true)}
+          className={`flex h-14 w-14 items-center justify-center text-2xl transition-all duration-500 cursor-pointer shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0D5FF9] focus-visible:ring-offset-2 ${
+            isNextHighlighted
+              ? 'bg-[#0D5FF9] text-white border-2 border-[#0D5FF9] scale-105 shadow-lg ring-4 ring-[#0D5FF9]/25'
+              : 'bg-white dark:bg-[#131417] text-[#141517] dark:text-white border-2 border-neutral-200 dark:border-white/15 hover:bg-[#0D5FF9] hover:text-white hover:border-[#0D5FF9]'
+          }`}
           aria-label="Impresia următoare"
         >
           <ChevronRight className="w-6 h-6" />
@@ -390,7 +511,7 @@ export function StaggerTestimonialsSection() {
       data-section-revealed={reveal.isRevealed ? 'true' : 'false'}
       aria-labelledby="impresii-heading"
       data-nosnippet
-      className="bg-transparent pt-16 pb-20 overflow-hidden border-t border-neutral-100 dark:border-white/10 transition-colors duration-500 ease-out"
+      className="bg-white dark:bg-transparent pt-16 pb-20 overflow-hidden transition-colors duration-500 ease-out"
     >
       <div
         style={{
@@ -423,7 +544,7 @@ export function StaggerTestimonialsSection() {
           transition: `opacity 640ms ${ease} 110ms, transform 640ms ${ease} 110ms`,
         }}
       >
-        <StaggerTestimonials />
+        <StaggerTestimonials isSectionRevealed={reveal.isRevealed} />
       </div>
     </section>
   );

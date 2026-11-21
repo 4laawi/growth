@@ -20,34 +20,34 @@ export const PROCESS_STEPS = [
   {
     step: '01',
     label: 'Descoperire',
-    title: 'Descoperire & Evaluarea Nevoilor',
+    title: 'Descoperire & Evaluare',
     deliverable: 'Diagnostic comercial gratuit',
     detail:
-      'Analizăm ce vinde afacerea ta în realitate, profilul clientului ideal, prezența digitală actuală și cerințele tehnice.',
+      'Analizăm oferta, publicul țintă și obiectivele de vânzare pentru a defini structura exactă.',
   },
   {
     step: '02',
     label: 'Recomandare',
-    title: 'Clarificare & Recomandare Onestă',
-    deliverable: 'Fără pachete umflate artificial',
+    title: 'Recomandare Strategică',
+    deliverable: 'Fără pachete inutile',
     detail:
-      'Stabilim soluția cea mai eficientă (nu automat cea mai scumpă): landing page de campanie, site de prezentare sau magazin online.',
+      'Alegem tipul optim de pagină: landing page de campanie, site de prezentare sau magazin online.',
   },
   {
     step: '03',
     label: 'Acord Ferm',
-    title: 'Ofertă Clară & Scop Agreat în Scris',
+    title: 'Ofertă & Scop Clar în Scris',
     deliverable: '30% avans / 70% la predare',
     detail:
-      'Defalcăm transparent paginile, integrările, etapele și termenele de livrare înainte de semnare, fără costuri ascunse.',
+      'Definim termenele de livrare, paginile incluse și costurile clare înainte de start.',
   },
   {
     step: '04',
     label: 'Lansare',
-    title: 'Dezvoltare, 2 Revizii & Lansare Asistată',
-    deliverable: '100% proprietatea clientului',
+    title: 'Dezvoltare, Revizii & Lansare',
+    deliverable: '100% proprietatea ta',
     detail:
-      'Design vizual → Dezvoltare → 2 runde majore de revizii → Predare domeniu & cod 100% → Indexare Search Console & suport.',
+      'Design, dezvoltare, 2 runde de revizii, conectare domeniu și predare completă a codului.',
   },
 ];
 
@@ -123,11 +123,10 @@ export function DarkMethodologySection({
         {/* Part 1: "Ziua 1, nu Ziua 100" + 4-Step Transparent Workflow */}
         <div>
           <div
-            className={`rounded-[28px] border p-8 md:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center overflow-hidden transition-colors duration-500 ease-out ${
-              isDarkMode
+            className={`rounded-[28px] border p-8 md:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center overflow-hidden transition-colors duration-500 ease-out ${isDarkMode
                 ? 'bg-[#131417] border-white/10 text-white'
                 : 'bg-[#F5F6F8] border-neutral-200/80 text-[#141517]'
-            }`}
+              }`}
           >
             {/* Left Column: Core Philosophy + Visible 4-Step Selector List */}
             <div className="lg:col-span-6 space-y-6">
@@ -145,11 +144,10 @@ export function DarkMethodologySection({
               </FigmaSelectionFrame>
 
               <p
-                className={`text-[16px] md:text-[18px] font-semibold leading-[1.45] tracking-[-0.01em] ${
-                  isDarkMode ? 'text-white/95' : 'text-neutral-700'
-                }`}
+                className={`text-[16px] md:text-[18px] font-semibold leading-[1.45] tracking-[-0.01em] ${isDarkMode ? 'text-white/95' : 'text-neutral-700'
+                  }`}
               >
-                Nu forțăm antreprenorii în pachete rigide. Diagnosticăm blocajele reale ale afacerii și lansăm rapid pe o fundație tehnică curată.
+                Fără pachete rigide sau costuri inutile. Diagnosticăm nevoile reale ale afacerii și lansăm rapid pe o fundație curată.
               </p>
 
               {/* All 4 Workflow Steps Visible at a Glance */}
@@ -161,25 +159,23 @@ export function DarkMethodologySection({
                       key={item.step}
                       type="button"
                       onClick={() => setActiveStepIdx(idx)}
-                      className={`w-full text-left p-3.5 rounded-xl border transition-colors duration-300 cursor-pointer flex items-center justify-between gap-4 ${
-                        isActive
+                      className={`w-full text-left p-3.5 rounded-xl border transition-colors duration-300 cursor-pointer flex items-center justify-between gap-4 ${isActive
                           ? isDarkMode
                             ? 'bg-[#0D5FF9]/15 border-[#0D5FF9] text-white'
                             : 'bg-[#0D5FF9]/[0.08] border-[#0D5FF9] text-[#141517]'
                           : isDarkMode
                             ? 'bg-white/[0.03] border-white/10 text-neutral-300 hover:border-white/25'
                             : 'bg-white border-neutral-200/90 text-neutral-700 hover:border-neutral-300'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <span
-                          className={`text-xs font-mono-code font-bold px-2 py-1 rounded ${
-                            isActive
+                          className={`text-xs font-mono-code font-bold px-2 py-1 rounded ${isActive
                               ? 'bg-[#0D5FF9] text-white'
                               : isDarkMode
                                 ? 'bg-white/10 text-neutral-400'
                                 : 'bg-neutral-100 text-neutral-600'
-                          }`}
+                            }`}
                         >
                           {item.step}
                         </span>
@@ -188,9 +184,8 @@ export function DarkMethodologySection({
                         </span>
                       </div>
                       <span
-                        className={`hidden sm:inline-block text-[11px] font-mono-code shrink-0 ${
-                          isDarkMode ? 'text-neutral-400' : 'text-neutral-500'
-                        }`}
+                        className={`hidden sm:inline-block text-[11px] font-mono-code shrink-0 ${isDarkMode ? 'text-neutral-400' : 'text-neutral-500'
+                          }`}
                       >
                         {item.deliverable}
                       </span>
@@ -237,11 +232,10 @@ export function DarkMethodologySection({
                       key={s.step}
                       type="button"
                       onClick={() => setActiveStepIdx(idx)}
-                      className={`px-2 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
-                        activeStepIdx === idx
+                      className={`px-2 py-1.5 rounded-md text-left transition-colors cursor-pointer ${activeStepIdx === idx
                           ? 'bg-white text-[#0D5FF9] font-semibold'
                           : 'bg-white/10 text-white/80 hover:bg-white/20'
-                      }`}
+                        }`}
                     >
                       <span className="block text-[10px] font-mono-code leading-none mb-0.5">
                         {s.step}
@@ -255,29 +249,26 @@ export function DarkMethodologySection({
           </div>
 
           <p
-            className={`mt-5 text-[12.5px] max-w-xl leading-relaxed ${
-              isDarkMode ? 'text-neutral-400' : 'text-neutral-500'
-            }`}
+            className={`mt-4 text-[12.5px] max-w-xl leading-relaxed ${isDarkMode ? 'text-neutral-400' : 'text-neutral-500'
+              }`}
           >
-            Bază în București și acoperire națională în toată România. Prețuri transparente, 2 runde de revizii incluse și 100% proprietatea clientului asupra codului.
+            Prețuri transparente, 2 runde de revizii incluse și proprietate 100% asupra codului.
           </p>
         </div>
 
         {/* Part 2: RoGrowth Philosophy, Real Project Speed Card & Interactive Accordion */}
         <div
-          className={`rounded-[32px] border p-8 md:p-12 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch transition-colors duration-500 ease-out ${
-            isDarkMode
+          className={`rounded-[32px] border p-8 md:p-12 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch transition-colors duration-500 ease-out ${isDarkMode
               ? 'bg-[#0B0C0E] border-white/10 text-white'
               : 'bg-[#F5F6F8] border-neutral-200/80 text-[#141517]'
-          }`}
+            }`}
         >
           {/* Left Column: Intro + Clean Core Web Vitals & Real Project Showcase */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
             <div className="space-y-5">
               <div
-                className={`text-xs font-mono-code tracking-wide ${
-                  isDarkMode ? 'text-[#7DD3FC]' : 'text-[#0D5FF9]'
-                }`}
+                className={`text-xs font-mono-code tracking-wide ${isDarkMode ? 'text-[#7DD3FC]' : 'text-[#0D5FF9]'
+                  }`}
               >
                 Claritate Comercială · Fără Șabloane Generice
               </div>
@@ -287,21 +278,19 @@ export function DarkMethodologySection({
               </h3>
 
               <p
-                className={`text-[14px] md:text-[15px] leading-[1.68] ${
-                  isDarkMode ? 'text-neutral-300' : 'text-neutral-600'
-                }`}
+                className={`text-[14px] md:text-[15px] leading-[1.65] ${isDarkMode ? 'text-neutral-300' : 'text-neutral-600'
+                  }`}
               >
-                Multe agenții tratează crearea unui site ca pe o simplă bifă sau livrează șabloane generice fără grijă pentru performanța post-lansare. Noi obsedăm asupra parcursului vizitatorului, căilor de conversie, vitezei tehnice pe mobil și sănătății pe termen lung a afacerii tale.
+                Fără șabloane generice sau teme lente. Proiectăm din perspectiva clientului tău: viteză pe mobil, structură clară și pagini optimizate să convertească.
               </p>
 
               <button
                 type="button"
                 onClick={() => onOpenContact('Site avansat orientat spre conversie (€700 – €1.200)')}
-                className={`group inline-flex items-center gap-3 pt-1 text-[14px] font-semibold transition-colors cursor-pointer ${
-                  isDarkMode
+                className={`group inline-flex items-center gap-3 pt-1 text-[14px] font-semibold transition-colors cursor-pointer ${isDarkMode
                     ? 'text-white hover:text-[#7DD3FC]'
                     : 'text-[#141517] hover:text-[#0D5FF9]'
-                }`}
+                  }`}
               >
                 <span className="w-6 h-6 rounded-full bg-[#FF6B2C] text-black flex items-center justify-center transition-transform group-hover:translate-x-1">
                   <ArrowRight className="w-3.5 h-3.5" />

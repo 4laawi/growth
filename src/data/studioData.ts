@@ -160,36 +160,36 @@ export const WORKSHOP_FAQ_ITEMS: WorkshopFaqItem[] = [
     question: 'De ce eșuează site-urile făcute ca o simplă bifă?',
     dutchSublabel: 'Atenția la parcursul vizitatorului',
     answer:
-      'Multe agenții livrează șabloane rigide, fără grijă pentru detalii sau performanța de după lansare. La RoGrowth proiectăm din perspectiva vizitatorului final: claritate vizuală imediată, navigare intuitivă pe telefon, încărcare rapidă, butoane vizibile de apel și WhatsApp și o propunere de valoare clară.',
+      'Majoritatea agențiilor folosesc șabloane greoaie, fără structură comercială. Noi construim de la zero: pagini rapide pe mobil, mesaje directe și conversie reală.',
     metricsHighlight:
-      'Filozofia „Visitor-First” · Diagnosticăm blocajele reale ale afacerii înainte de a recomanda orice serviciu.',
+      'Focalizare pe conversie · Arhitectură curată orientată direct pe clienți.',
   },
   {
     id: 'missing',
-    question: 'Care este politica noastră privind AI-ul și calitatea codului?',
+    question: 'Care este politica noastră privind AI-ul și codul?',
     dutchSublabel: 'Fără șabloane generice',
     answer:
-      'Folosim instrumente AI intern pentru viteză, productivitate și automatizarea codului repetitiv. AI-ul nu înlocuiește niciodată gândirea strategică, gustul uman în design, discernământul comercial, verificarea tehnică (QA) sau copywriting-ul documentat. Niciun client nu primește pagini robotice.',
+      'Folosim AI strict ca asistent de viteză pentru sarcini repetitive. Strategia, designul, copywriting-ul și verificarea calității sunt 100% umane.',
     metricsHighlight:
-      'Standard tehnic · Next.js, TypeScript, Tailwind CSS & Supabase cu țintă 100/100 Core Web Vitals.',
+      'Cod modern & curat · Next.js și Tailwind fără cod rezidual.',
   },
   {
     id: 'audience',
     question: 'Cine deține domeniul, codul sursă și baza de date?',
     dutchSublabel: 'Zero vendor lock-in',
     answer:
-      'Evităm deliberat blocarea clientului în sisteme proprietare. La plata finală, clientul deține 100% numele de domeniu, repository-ul de cod, baza de date și activele grafice. Site-ul poate fi migrat liber pe orice server sau găzduit prin serviciul administrat RoGrowth (SSL, monitorizare uptime, securitate).',
+      'Tu deții 100% din tot: domeniu, cod, imagini și date. Fără abonamente forțate sau blocaje pe platforme închise.',
     metricsHighlight:
-      'Drepturi 100% ale clientului · Garanție post-lansare inclusă pentru rezolvarea promptă a oricăror erori de afișare.',
+      'Proprietate totală · Poți migra sau găzdui oriunde fără restricții.',
   },
   {
     id: 'outcome',
-    question: 'Cum funcționează prețurile, plata și rundele de revizii?',
+    question: 'Cum funcționează prețurile, plata și reviziile?',
     dutchSublabel: 'Claritate comercială în scris',
     answer:
-      'Nu inventăm reduceri false și nu pretindem că suntem „cea mai ieftină agenție”. Oferim prețuri competitive și meșteșug tehnic fără compromis: 30% avans / 70% la predare (sau 30% / 40% / 30% pentru proiecte mari), 2 runde structurate de revizii majore incluse și ajustări mici de text tratate flexibil, fără costuri ascunse.',
+      'Prețuri fixe agreate în scris: 30% avans și 70% la lansare. 2 runde complete de revizii incluse și zero costuri ascunse.',
     metricsHighlight:
-      'Prețuri transparente · Prezentare €300–€400 · Conversie €700–€1.200 · E-commerce & Web Apps €1.000–€2.300+.',
+      'Transparență totală · Prezentare €300–€400 · Conversie €700–€1.200 · E-commerce €1.000+.',
   },
 ];
 

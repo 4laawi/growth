@@ -6,7 +6,6 @@ import {
   Flame,
   Heart,
   RefreshCw,
-  RotateCcw,
   Star,
 } from 'lucide-react';
 
@@ -177,9 +176,6 @@ export const CLIENT_TRUST_BRANDS = [
   'baristas.ro',
   'dubairent.ro',
   'agrumea.ro',
-  'Next.js 15',
-  'Figma UI/UX',
-  'Framer Motion',
 ];
 
 /**
@@ -234,7 +230,6 @@ export function FigmaFramerShowcaseSection({
   variant = 'homepage',
 }: FigmaFramerShowcaseSectionProps) {
   const cardRef = React.useRef<HTMLDivElement | null>(null);
-  const [revealKey, setRevealKey] = useState(0);
   const [isCardRevealed, setIsCardRevealed] = useState(false);
   const [activePair, setActivePair] = useState<
     [PriorityOptionId, PriorityOptionId]
@@ -260,16 +255,6 @@ export function FigmaFramerShowcaseSection({
     return () => io.disconnect();
   }, []);
 
-  // Trigger smooth reveal animation on replay button click
-  useEffect(() => {
-    if (revealKey === 0) return;
-    setIsCardRevealed(false);
-    const timer = window.setTimeout(() => {
-      setIsCardRevealed(true);
-    }, 120);
-    return () => window.clearTimeout(timer);
-  }, [revealKey]);
-
   const pairKey = getPriorityPairKey(activePair);
   const activePackage = PICK_TWO_PACKAGES[pairKey];
 
@@ -293,30 +278,6 @@ export function FigmaFramerShowcaseSection({
       ===================================================================== */}
       <div className="max-w-[1160px] mx-auto px-6 md:px-10">
         <div className="relative flex flex-col items-center">
-          {/* Top bar above the tilted card: studio label + replay reveal button */}
-          <div className="w-full max-w-[920px] flex items-center justify-between mb-4 px-1">
-            <div className="flex items-center gap-2 text-xs font-mono-code text-neutral-500 dark:text-neutral-400">
-              <span className="font-bold text-[#141517] dark:text-white">
-                RoGrowth
-              </span>
-              <span className="text-[#FF5522] italic font-serif font-semibold">
-                flip
-              </span>
-              <span aria-hidden="true">·</span>
-              <span>Figma UI/UX &amp; Framer / Next.js Studio</span>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setRevealKey((prev) => prev + 1)}
-              aria-label="Reia animația de apariție a secțiunii"
-              className="inline-flex items-center gap-1.5 text-[11.5px] font-mono-code text-neutral-500 hover:text-[#FF5522] dark:text-neutral-400 dark:hover:text-[#FF7849] transition-colors cursor-pointer"
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reia animația</span>
-            </button>
-          </div>
-
           {/* The Tilted Warm-Editorial Reveal Container (Matches Video 00:01 -> 00:09) */}
           <div
             ref={cardRef}

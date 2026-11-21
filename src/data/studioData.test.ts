@@ -306,6 +306,8 @@ import {
   ROGROWTH_TESTIMONIALS,
   computeStaggerPosition,
   rotateTestimonialsList,
+  AUTOPLAY_INTERVAL_MS,
+  ONBOARDING_DEMO_DELAY_MS,
 } from '../components/ui/stagger-testimonials';
 
 test('StaggerTestimonials dataset, position math, and list rotation work accurately without review schema spam', () => {
@@ -334,6 +336,16 @@ test('StaggerTestimonials dataset, position math, and list rotation work accurat
   assert.equal(prevList.length, 20);
   assert.equal(prevList[10].by, ROGROWTH_TESTIMONIALS[9].by);
   assert.equal(prevList[0].by, ROGROWTH_TESTIMONIALS[19].by);
+
+  // Verify 20 consecutive forward rotations complete a seamless full loop back to the initial testimonial order
+  let looped = ROGROWTH_TESTIMONIALS;
+  for (let step = 0; step < 20; step++) {
+    looped = rotateTestimonialsList(looped, 1);
+  }
+  assert.equal(looped.length, 20);
+  assert.equal(looped[10].by, ROGROWTH_TESTIMONIALS[10].by);
+  assert.equal(AUTOPLAY_INTERVAL_MS, 3000);
+  assert.equal(ONBOARDING_DEMO_DELAY_MS, 1000);
 
   // Ensure JSON-LD schema never claims Review or AggregateRating
   const schemaStr = JSON.stringify(
