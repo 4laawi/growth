@@ -311,41 +311,41 @@ import {
 } from '../components/ui/stagger-testimonials';
 
 test('StaggerTestimonials dataset, position math, and list rotation work accurately without review schema spam', () => {
-  assert.equal(ROGROWTH_TESTIMONIALS.length, 20);
+  assert.equal(ROGROWTH_TESTIMONIALS.length, 10);
   for (const item of ROGROWTH_TESTIMONIALS) {
     assert.ok(!item.testimonial.includes('COMPANY'));
     assert.ok(item.imgSrc.startsWith('/PFP/'));
     assert.ok(item.by.length > 3);
   }
 
-  // Verify position calculation centers index 10 for length 20
-  assert.equal(computeStaggerPosition(10, 20), 0);
-  assert.equal(computeStaggerPosition(9, 20), -1);
-  assert.equal(computeStaggerPosition(11, 20), 1);
+  // Verify position calculation centers index 5 for length 10
+  assert.equal(computeStaggerPosition(5, 10), 0);
+  assert.equal(computeStaggerPosition(4, 10), -1);
+  assert.equal(computeStaggerPosition(6, 10), 1);
 
-  // Verify forward rotation (+1) shifts the first item to the end and advances index 11 to index 10 (center)
+  // Verify forward rotation (+1) shifts the first item to the end and advances index 6 to index 5 (center)
   let seq = 100;
   const nextList = rotateTestimonialsList(ROGROWTH_TESTIMONIALS, 1, () => ++seq);
-  assert.equal(nextList.length, 20);
-  assert.equal(nextList[10].by, ROGROWTH_TESTIMONIALS[11].by);
-  assert.equal(nextList[19].by, ROGROWTH_TESTIMONIALS[0].by);
-  assert.equal(nextList[19].tempId, 101);
+  assert.equal(nextList.length, 10);
+  assert.equal(nextList[5].by, ROGROWTH_TESTIMONIALS[6].by);
+  assert.equal(nextList[9].by, ROGROWTH_TESTIMONIALS[0].by);
+  assert.equal(nextList[9].tempId, 101);
 
-  // Verify backward rotation (-1) pops the last item to the front and moves index 9 to index 10 (center)
+  // Verify backward rotation (-1) pops the last item to the front and moves index 4 to index 5 (center)
   const prevList = rotateTestimonialsList(ROGROWTH_TESTIMONIALS, -1, () => ++seq);
-  assert.equal(prevList.length, 20);
-  assert.equal(prevList[10].by, ROGROWTH_TESTIMONIALS[9].by);
-  assert.equal(prevList[0].by, ROGROWTH_TESTIMONIALS[19].by);
+  assert.equal(prevList.length, 10);
+  assert.equal(prevList[5].by, ROGROWTH_TESTIMONIALS[4].by);
+  assert.equal(prevList[0].by, ROGROWTH_TESTIMONIALS[9].by);
 
-  // Verify 20 consecutive forward rotations complete a seamless full loop back to the initial testimonial order
+  // Verify 10 consecutive forward rotations complete a seamless full loop back to the initial testimonial order
   let looped = ROGROWTH_TESTIMONIALS;
-  for (let step = 0; step < 20; step++) {
+  for (let step = 0; step < 10; step++) {
     looped = rotateTestimonialsList(looped, 1);
   }
-  assert.equal(looped.length, 20);
-  assert.equal(looped[10].by, ROGROWTH_TESTIMONIALS[10].by);
+  assert.equal(looped.length, 10);
+  assert.equal(looped[5].by, ROGROWTH_TESTIMONIALS[5].by);
   assert.equal(AUTOPLAY_INTERVAL_MS, 3000);
-  assert.equal(ONBOARDING_DEMO_DELAY_MS, 1000);
+  assert.equal(ONBOARDING_DEMO_DELAY_MS, 350);
 
   // Ensure JSON-LD schema never claims Review or AggregateRating
   const schemaStr = JSON.stringify(

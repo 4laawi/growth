@@ -36,21 +36,13 @@ export const ROGROWTH_TESTIMONIALS: StaggerTestimonialItem[] = [
   {
     tempId: 2,
     testimonial:
-      'Știu că sună a clișeu, dar eram complet blocați cu vechiul site înainte să dăm de RoGrowth. Ne-au clarificat toată structura din prima zi!',
-    by: 'Ștefania · Co-Fondatoare, Atelier & Showroom',
-    contextTag: 'Claritate comercială',
-    imgSrc: DEFAULT_AVATAR,
-  },
-  {
-    tempId: 3,
-    testimonial:
       'Modul în care RoGrowth gândește pagina din perspectiva clientului final face planificarea campaniilor mult mai simplă.',
     by: 'Maria · Director Operațiuni, Imobiliare Ilfov',
     contextTag: 'Arhitectură Lead-Gen',
     imgSrc: '/PFP/HOUSE.webp',
   },
   {
-    tempId: 4,
+    tempId: 3,
     testimonial:
       'Dacă aș putea aprecia atenția la detalii pe o scară de la 1 la 10, le-aș da 12 fără ezitare.',
     by: 'Andrei · Head of Design, Studio Creativ',
@@ -58,15 +50,7 @@ export const ROGROWTH_TESTIMONIALS: StaggerTestimonialItem[] = [
     imgSrc: '/PFP/man-in-the-pool.webp',
   },
   {
-    tempId: 5,
-    testimonial:
-      'Ne bucurăm enorm că v-am găsit! Faptul că s-au ocupat de text, structură și Search Console ne-a scutit de cel puțin 100 de ore de bătăi de cap.',
-    by: 'Ionuț · Manager Produs, Servicii Auto',
-    contextTag: 'Livrare la cheie',
-    imgSrc: DEFAULT_AVATAR,
-  },
-  {
-    tempId: 6,
+    tempId: 4,
     testimonial:
       'Am fost sceptici la început după experiențe neplăcute cu freelanceri, dar după cum lucrează echipa RoGrowth, nu ne mai întoarcem la șabloane.',
     by: 'Paula · Coordonator Marketing, Retail RO',
@@ -74,31 +58,7 @@ export const ROGROWTH_TESTIMONIALS: StaggerTestimonialItem[] = [
     imgSrc: '/PFP/Romanian_flag_WOMAN.webp',
   },
   {
-    tempId: 7,
-    testimonial:
-      'Ne-au spus direct că nu avem nevoie de un pachet scump, ci de o pagină rapidă de €350 orientată pe apeluri și WhatsApp. Onestitate rară.',
-    by: 'Daniel · Fondator, Servicii Locale București',
-    contextTag: 'Diagnostic onest',
-    imgSrc: DEFAULT_AVATAR,
-  },
-  {
-    tempId: 8,
-    testimonial:
-      'Pur și simplu cel mai curat cod și cea mai clară comunicare pe care le-am întâlnit. Punct.',
-    by: 'Ancuța · UX Consultant, Proiecte Digitale',
-    contextTag: '100/100 Core Web Vitals',
-    imgSrc: DEFAULT_AVATAR,
-  },
-  {
-    tempId: 9,
-    testimonial:
-      'Am trecut pe arhitectura Next.js propusă de RoGrowth și site-ul se încarcă instantaneu pe orice telefon.',
-    by: 'Adi · Inginer Software, Platformă SaaS',
-    contextTag: 'Performanță mobilă',
-    imgSrc: encodeURI("/PFP/I'm looking for a peaceful relationship_MAN.webp"),
-  },
-  {
-    tempId: 10,
+    tempId: 5,
     testimonial:
       'Căutam de ani de zile o echipă care să vorbească pe limba noastră, fără jargon tehnic inutil și fără costuri ascunse pe parcurs.',
     by: 'Petru · Director Vânzări, Distribuție B2B',
@@ -106,7 +66,15 @@ export const ROGROWTH_TESTIMONIALS: StaggerTestimonialItem[] = [
     imgSrc: '/PFP/man01.webp',
   },
   {
-    tempId: 11,
+    tempId: 6,
+    testimonial:
+      'Am trecut pe arhitectura Next.js propusă de RoGrowth și site-ul se încarcă instantaneu pe orice telefon.',
+    by: 'Adi · Inginer Software, Platformă SaaS',
+    contextTag: 'Performanță mobilă',
+    imgSrc: encodeURI("/PFP/I'm looking for a peaceful relationship_MAN.webp"),
+  },
+  {
+    tempId: 7,
     testimonial:
       'Panoul de administrare este atât de simplu și intuitiv încât echipa noastră a învățat să actualizeze ofertele în 10 minute.',
     by: 'Marina · Manager Echipă, Centru Educațional',
@@ -114,31 +82,7 @@ export const ROGROWTH_TESTIMONIALS: StaggerTestimonialItem[] = [
     imgSrc: '/PFP/woman03.webp',
   },
   {
-    tempId: 12,
-    testimonial:
-      'Răspunsul rapid pe WhatsApp și felul în care gestionează cele 2 runde de revizii fac toată colaborarea lipsită de stres.',
-    by: 'Olivia · Coordonator Relații Clienți, Clinică Dentară',
-    contextTag: 'Răspuns < 24h',
-    imgSrc: DEFAULT_AVATAR,
-  },
-  {
-    tempId: 13,
-    testimonial:
-      'Diferența de viteză și claritate față de vechiul nostru magazin online s-a văzut imediat în comenzile de pe mobil.',
-    by: 'Radu · Manager Operațional, E-Commerce Cafea',
-    contextTag: 'Conversie pe mobil',
-    imgSrc: DEFAULT_AVATAR,
-  },
-  {
-    tempId: 14,
-    testimonial:
-      'RoGrowth ne-a schimbat complet modul în care preluăm programările online. Tot fluxul este acum automatizat și clar.',
-    by: 'Loredana · Fondatoare, Salon & Beauty Lounge',
-    contextTag: 'Programări online',
-    imgSrc: DEFAULT_AVATAR,
-  },
-  {
-    tempId: 15,
+    tempId: 8,
     testimonial:
       'Ne place că arhitectura este construită să crească odată cu afacerea noastră: am pornit cu prezentare și am adăugat catalogul fără să refacem totul.',
     by: 'Tudor · Antreprenor, Închirieri Auto Otopeni',
@@ -146,35 +90,11 @@ export const ROGROWTH_TESTIMONIALS: StaggerTestimonialItem[] = [
     imgSrc: encodeURI('/PFP/☼ Romania ☼.webp'),
   },
   {
-    tempId: 16,
+    tempId: 9,
     testimonial:
-      'Apreciez că folosesc tehnologie modernă, dar păstrează mereu gustul uman în design și verificarea atentă a fiecărei pagini.',
-    by: 'Naomi · Brand Manager, Producător Artizanal',
-    contextTag: 'Design verificat uman',
-    imgSrc: DEFAULT_AVATAR,
-  },
-  {
-    tempId: 17,
-    testimonial:
-      'Structura de plată 30% avans și 70% la finalizare ne-a oferit încredere totală încă de la semnarea contractului.',
-    by: 'Victor · Analist Financiar, Consultanță IMM',
-    contextTag: '30% avans / 70% la predare',
-    imgSrc: DEFAULT_AVATAR,
-  },
-  {
-    tempId: 18,
-    testimonial:
-      'Platforma livrată de RoGrowth este robustă tehnic, dar extrem de aerisită vizual. Echilibrul ideal între estetică și vânzare.',
-    by: 'Cătălin · Tech Lead, Proiecte Imobiliare',
-    contextTag: 'Design & Conversie',
-    imgSrc: DEFAULT_AVATAR,
-  },
-  {
-    tempId: 19,
-    testimonial:
-      'Am testat mai multe variante înainte, dar RoGrowth iese în evidență prin seriozitate, termene respectate și zero blocaje tehnice.',
-    by: 'Zoe · Manager Performanță, Servicii B2B',
-    contextTag: 'Livrare în 2–4 săpt.',
+      'Ne-au spus direct că nu avem nevoie de un pachet scump, ci de o pagină rapidă de €350 orientată pe apeluri și WhatsApp. Onestitate rară.',
+    by: 'Daniel · Fondator, Servicii Locale București',
+    contextTag: 'Diagnostic onest',
     imgSrc: DEFAULT_AVATAR,
   },
 ];
@@ -324,7 +244,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   );
 };
 
-export const ONBOARDING_DEMO_DELAY_MS = 1000;
+export const ONBOARDING_DEMO_DELAY_MS = 350;
 export const AUTOPLAY_INTERVAL_MS = 3000;
 
 export interface StaggerTestimonialsProps {
@@ -345,8 +265,7 @@ export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
   const userInteractedRef = useRef(false);
   const stageRef = useRef<HTMLDivElement | null>(null);
 
-  const isSectionActive =
-    isSectionRevealed !== undefined ? isSectionRevealed : isInView;
+  const isSectionActive = Boolean(isSectionRevealed || isInView);
 
   const handleMove = useCallback((steps: number, isUserAction = false) => {
     if (steps === 0) return;
@@ -380,7 +299,7 @@ export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
         const [entry] = entries;
         setIsInView(entry.isIntersecting);
       },
-      { threshold: 0.15 }
+      { threshold: 0.05, rootMargin: '60px 0px 0px 0px' }
     );
 
     observer.observe(el);
@@ -388,8 +307,8 @@ export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
   }, []);
 
   // On arrival (scrolling down and revealing the section):
-  // Automatically advance to next comment after ~1s with a subtle highlight on the Next button.
-  // This demonstrates the interaction so visitors know they can click the Next button to try it themselves.
+  // Automatically advance to next comment swiftly with a subtle highlight on the Next button.
+  // This demonstrates the interaction immediately so visitors know they can click the Next button to try it themselves.
   useEffect(() => {
     if (!isSectionActive || hasTriggeredDemo || userInteractedRef.current) return;
 
@@ -402,7 +321,7 @@ export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
     }
 
     const demoTimer = setTimeout(() => {
-      if (userInteractedRef.current || isHovered) return;
+      if (userInteractedRef.current) return;
       if (typeof document !== 'undefined' && document.hidden) return;
 
       setHasTriggeredDemo(true);
@@ -411,13 +330,13 @@ export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
 
       const unhighlightTimer = setTimeout(() => {
         setIsNextHighlighted(false);
-      }, 900);
+      }, 700);
 
       return () => clearTimeout(unhighlightTimer);
     }, ONBOARDING_DEMO_DELAY_MS);
 
     return () => clearTimeout(demoTimer);
-  }, [isSectionActive, hasTriggeredDemo, isHovered, handleMove]);
+  }, [isSectionActive, hasTriggeredDemo, handleMove]);
 
   // Regular autoplay loop:
   // After the arrival demonstration has completed (or user interacted),
