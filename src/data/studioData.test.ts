@@ -314,7 +314,7 @@ test('StaggerTestimonials dataset, position math, and list rotation work accurat
   assert.equal(ROGROWTH_TESTIMONIALS.length, 20);
   for (const item of ROGROWTH_TESTIMONIALS) {
     assert.ok(!item.testimonial.includes('COMPANY'));
-    assert.ok(item.imgSrc.startsWith('/assets/'));
+    assert.ok(item.imgSrc.startsWith('/PFP/'));
     assert.ok(item.by.length > 3);
   }
 
@@ -398,38 +398,31 @@ test('computeDarkModeScrollState keeps website white at start, switches to dark 
   assert.equal(afterSection.phase, 'after');
 });
 
-test('computeTeamSectionScrollState hides TeamSection while in dark mode and reveals smoothly onto full-page stage after dark section finishes', () => {
+test('computeTeamSectionScrollState reveals smoothly onto full-page stage as section enters viewport', () => {
   const vh = 900;
   const trackH = 1620; // 180vh
 
-  // 1. User is still inside DarkMethodologySection (trackTop = 450px, isDarkMode = true) -> TeamSection stays completely hidden
-  const whileInDark = computeTeamSectionScrollState(450, trackH, vh, true);
-  assert.equal(whileInDark.isRevealed, false);
-  assert.equal(whileInDark.revealTarget, 0);
-  assert.equal(whileInDark.scrollProgress, 0);
-  assert.equal(whileInDark.phase, 'waiting-dark-exit');
+  // 1. Below trigger threshold (trackTop = 750px > 0.75 * 900 = 675px) -> waiting to enter
+  const beforeEnter = computeTeamSectionScrollState(750, trackH, vh, false);
+  assert.equal(beforeEnter.isRevealed, false);
+  assert.equal(beforeEnter.revealTarget, 0);
+  assert.equal(beforeEnter.scrollProgress, 0);
 
-  // 2. Even if isDarkMode were false, if trackTop > 0.24 * vh (e.g. 280px > 216px), it still waits for dark section to finish
-  const beforeUnlockLine = computeTeamSectionScrollState(280, trackH, vh, false);
-  assert.equal(beforeUnlockLine.isRevealed, false);
-  assert.equal(beforeUnlockLine.revealTarget, 0);
-  assert.equal(beforeUnlockLine.phase, 'waiting-dark-exit');
-
-  // 3. User finishes dark section & leaves dark mode (trackTop = 180px <= 216px, isDarkMode = false) -> unlocks and unfades
-  const justUnlocked = computeTeamSectionScrollState(180, trackH, vh, false);
+  // 2. Enters viewport (trackTop = 600px <= 675px) -> unlocks smoothly
+  const justUnlocked = computeTeamSectionScrollState(600, trackH, vh, false);
   assert.equal(justUnlocked.isRevealed, true);
   assert.equal(justUnlocked.revealTarget, 1);
   assert.equal(justUnlocked.phase, 'active');
   assert.ok(justUnlocked.scrollProgress > 0 && justUnlocked.scrollProgress < 0.2);
 
-  // 4. Pinned mid-scroll in full-page stage (trackTop = -360px, isDarkMode = false) -> revealed with mid parallax progress
+  // 3. Pinned mid-scroll in full-page stage (trackTop = -360px) -> revealed with mid parallax progress
   const midStage = computeTeamSectionScrollState(-360, trackH, vh, false);
   assert.equal(midStage.isRevealed, true);
   assert.equal(midStage.revealTarget, 1);
   assert.ok(midStage.scrollProgress > 0.5 && midStage.scrollProgress < 0.8);
 
-  // 5. Completed full-page stage (trackTop = -720px, isDarkMode = false) -> complete
-  const completedStage = computeTeamSectionScrollState(-720, trackH, vh, false);
+  // 4. Completed full-page stage (trackTop = -800px) -> complete
+  const completedStage = computeTeamSectionScrollState(-800, trackH, vh, false);
   assert.equal(completedStage.isRevealed, true);
   assert.equal(completedStage.revealTarget, 1);
   assert.equal(completedStage.scrollProgress, 1);

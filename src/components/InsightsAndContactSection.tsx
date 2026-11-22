@@ -10,6 +10,7 @@ import {
   WireframeBrowserCard,
 } from './StudioIcons';
 import { useSectionReveal } from './ui/StudioPrimitives';
+import { RoGrowthWordmarkFooter } from './ui/wordmark-footer';
 import { Instagram, Linkedin, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const EASE_OUT_EXPO = 'cubic-bezier(0.22, 1, 0.36, 1)';
@@ -576,43 +577,17 @@ export function InsightsAndContactSection({
         </div>
       </section>
 
-      {/* Part 3: Minimalist Monospace Footer */}
-      <footer className="border-t border-neutral-100 pt-8 pb-24 px-6 md:px-48 text-center">
-        <div className="max-w-[1360px] mx-auto flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[10px] md:text-[11px] font-mono-code tracking-wider uppercase text-neutral-400">
-          <span>
-            ©2026 ROGROWTH.RO — AGENȚIE DE MARKETING DIGITAL & CREARE SITE-URI WEB. BUCUREȘTI, ROMÂNIA (ACOPERIRE NAȚIONALĂ). 100% PROPRIETATEA CLIENTULUI.
-          </span>
-          <a
-            href="#servicios"
-            className="underline hover:text-[#141517] transition-colors whitespace-nowrap"
-          >
-            SERVICII & PREȚURI
-          </a>
-          {onNavigateDesignSystem && (
-            <button
-              type="button"
-              onClick={onNavigateDesignSystem}
-              className="underline hover:text-[#0D5FF9] transition-colors uppercase cursor-pointer whitespace-nowrap"
-            >
-              SISTEM UI & COMPONENTE
-            </button>
-          )}
-          <button
-            type="button"
-            onClick={() => onOpenLegalModal('terminos')}
-            className="underline hover:text-[#141517] transition-colors uppercase cursor-pointer whitespace-nowrap"
-          >
-            TERMENI COMERCIALI
-          </button>
-          <button
-            type="button"
-            onClick={() => onOpenLegalModal('privacidad')}
-            className="underline hover:text-[#141517] transition-colors uppercase cursor-pointer whitespace-nowrap"
-          >
-            CONFIDENȚIALITATE
-          </button>
-        </div>
-      </footer>
+      {/* Part 3: Branded Wordmark Footer */}
+      <RoGrowthWordmarkFooter
+        onOpenLegalModal={onOpenLegalModal}
+        onNavigate={(path) => {
+          if (path === '/design-system' && onNavigateDesignSystem) {
+            onNavigateDesignSystem();
+          } else if (typeof window !== 'undefined') {
+            window.location.href = path;
+          }
+        }}
+      />
     </div>
   );
 }

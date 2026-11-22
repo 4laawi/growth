@@ -1,26 +1,116 @@
 import React, { useEffect, useRef } from 'react';
 import {
-  HIRING_NOTIFICATIONS,
-  TEAM_MEMBERS,
-  HiringNotification,
   computeTeamSectionScrollState,
   computeWordSmoothReveal,
 } from '../data/studioData';
-import { OnlinesNotificationBubble } from './StudioIcons';
 
 interface TeamSectionProps {
-  onOpenCareersModal: (selectedJob?: HiringNotification) => void;
+  onOpenCareersModal?: () => void;
   isDarkMode?: boolean;
 }
 
-const PORTRAIT_PARALLAX_SPEEDS = [0.85, 1.25, 0.95, 1.15, 0.75, 1.3];
-const BUBBLE_PARALLAX_SPEEDS = [1.1, 1.35, 0.9, 1.2];
+interface FloatingTechItem {
+  id: string;
+  name: string;
+  src: string;
+  /** Rest target polar coordinates relative to stage center */
+  angleDeg: number;       // Angle in degrees around stage center
+  radiusXPercent: number; // % of stage half-width (0..100)
+  radiusYPercent: number; // % of stage half-height (0..100)
+  size: number;
+  rotationSpeed: number;  // Multiplier for orbital velocity & parallax
+  spinOffsetDeg: number;  // Initial rotational spiral offset
+}
 
-const BUBBLE_POSITIONS = [
-  'top-[23%] left-[18%]',
-  'top-[14.5%] left-[45.5%]',
-  'top-[11%] right-[3.5%]',
-  'bottom-[7%] left-[52.5%]',
+const FRAMEWORK_LOGOS: FloatingTechItem[] = [
+  {
+    id: 'nextjs',
+    name: 'Next.js',
+    src: '/assets/framework--logos/nextjs.png',
+    angleDeg: 215,
+    radiusXPercent: 78,
+    radiusYPercent: 72,
+    size: 64,
+    rotationSpeed: 1.0,
+    spinOffsetDeg: 120,
+  },
+  {
+    id: 'angular',
+    name: 'Angular',
+    src: '/assets/framework--logos/angular-logo.webp',
+    angleDeg: 325,
+    radiusXPercent: 76,
+    radiusYPercent: 68,
+    size: 58,
+    rotationSpeed: -1.15,
+    spinOffsetDeg: -130,
+  },
+  {
+    id: 'tailwind',
+    name: 'Tailwind CSS',
+    src: '/assets/framework--logos/taiwlind-logo.webp',
+    angleDeg: 170,
+    radiusXPercent: 86,
+    radiusYPercent: 42,
+    size: 60,
+    rotationSpeed: 0.9,
+    spinOffsetDeg: 100,
+  },
+  {
+    id: 'webdesign',
+    name: 'UI/UX & Web Design',
+    src: '/assets/framework--logos/web-design.png',
+    angleDeg: 10,
+    radiusXPercent: 88,
+    radiusYPercent: 40,
+    size: 62,
+    rotationSpeed: -1.05,
+    spinOffsetDeg: -110,
+  },
+  {
+    id: 'html',
+    name: 'HTML5',
+    src: '/assets/framework--logos/html-logo.webp',
+    angleDeg: 235,
+    radiusXPercent: 62,
+    radiusYPercent: 60,
+    size: 56,
+    rotationSpeed: 1.25,
+    spinOffsetDeg: 150,
+  },
+  {
+    id: 'css',
+    name: 'CSS3',
+    src: '/assets/framework--logos/css.webp',
+    angleDeg: 305,
+    radiusXPercent: 64,
+    radiusYPercent: 58,
+    size: 56,
+    rotationSpeed: -1.2,
+    spinOffsetDeg: -140,
+  },
+  {
+    id: 'python',
+    name: 'Python',
+    src: '/assets/framework--logos/python-logo.webp',
+    angleDeg: 135,
+    radiusXPercent: 70,
+    radiusYPercent: 66,
+    size: 54,
+    rotationSpeed: 0.85,
+    spinOffsetDeg: 90,
+  },
+  {
+    id: 'mysql',
+    name: 'MySQL',
+    src: '/assets/framework--logos/mysql-logo.webp',
+    angleDeg: 45,
+    radiusXPercent: 72,
+    radiusYPercent: 64,
+    size: 58,
+    rotationSpeed: -0.95,
+    spinOffsetDeg: -95,
+  },
 ];
 
 function clamp01(value: number): number {
@@ -30,6 +120,12 @@ function clamp01(value: number): number {
 function smoothWindow(progress: number, start: number, end: number): number {
   const t = clamp01((progress - start) / Math.max(0.001, end - start));
   return t * t * (3 - 2 * t);
+}
+
+// Gentle elastic / smooth cubic settle curve
+function easeOutCubic(t: number): number {
+  const p = 1 - t;
+  return 1 - p * p * p;
 }
 
 export function TeamSection({
@@ -43,11 +139,9 @@ export function TeamSection({
   const highlightHandleLeftRef = useRef<HTMLSpanElement | null>(null);
   const highlightHandleRightRef = useRef<HTMLSpanElement | null>(null);
   const ctaWrapRef = useRef<HTMLDivElement | null>(null);
-  const mobileWrapRef = useRef<HTMLDivElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
 
-  const portraitRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const bubbleRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const logoRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const isDarkModeRef = useRef(isDarkMode);
 
@@ -65,7 +159,7 @@ export function TeamSection({
       typeof window.matchMedia === 'function' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const applyVisualFrame = (reveal: number, scrollProgress: number) => {
+    const applyVisualFrame = (reveal: number, scrollProgress: number, timeMs: number) => {
       const trackEl = trackRef.current;
       if (!trackEl) return;
 
@@ -85,7 +179,7 @@ export function TeamSection({
         gridBackdropRef.current.style.opacity = (gridWeight * 0.78).toFixed(3);
       }
 
-      // 2. Centerpiece headline ("O agenție construită pe claritate și meșteșug.")
+      // 2. Centerpiece headline
       if (headlineWrapRef.current) {
         const hWeight = smoothWindow(reveal, 0.06, 0.62);
         const hY = (1 - hWeight) * 24 - (scrollProgress - 0.5) * 8 * hWeight;
@@ -94,7 +188,7 @@ export function TeamSection({
         headlineWrapRef.current.style.transform = `translate3d(0, ${hY.toFixed(2)}px, 0) scale(${hScale.toFixed(3)})`;
       }
 
-      // 3. Figma selection handles on "claritate și meșteșug."
+      // 3. Selection handles on highlight
       const handleWeight = smoothWindow(reveal, 0.22, 0.74);
       if (highlightHandleLeftRef.current) {
         highlightHandleLeftRef.current.style.opacity = handleWeight.toFixed(3);
@@ -105,7 +199,7 @@ export function TeamSection({
         highlightHandleRightRef.current.style.transform = `scaleY(${handleWeight.toFixed(3)})`;
       }
 
-      // 4. Primary CTA button ("Vezi roluri deschise")
+      // 4. Primary CTA button
       if (ctaWrapRef.current) {
         const ctaWeight = smoothWindow(reveal, 0.18, 0.72);
         const ctaY = (1 - ctaWeight) * 18;
@@ -113,51 +207,54 @@ export function TeamSection({
         ctaWrapRef.current.style.transform = `translate3d(0, ${ctaY.toFixed(2)}px, 0)`;
       }
 
-      // 5. Staggered unfade + gentle full-page scroll parallax for 6 floating team portraits
-      const totalPortraits = TEAM_MEMBERS.length;
-      for (let i = 0; i < totalPortraits; i++) {
-        const el = portraitRefs.current[i];
+      // 5. Orbital / Circular Vortex Reveal & Scroll Parallax for Framework Logos
+      const stageEl = stageContentRef.current;
+      const stageW = stageEl ? stageEl.clientWidth : 1200;
+      const stageH = stageEl ? stageEl.clientHeight : 700;
+      const halfW = Math.max(300, stageW * 0.5);
+      const halfH = Math.max(240, stageH * 0.5);
+
+      const totalLogos = FRAMEWORK_LOGOS.length;
+      for (let i = 0; i < totalLogos; i++) {
+        const el = logoRefs.current[i];
         if (!el) continue;
 
-        const staggerProgress = smoothWindow(reveal, 0.2, 0.92);
-        const w = computeWordSmoothReveal(staggerProgress, i, totalPortraits, 2.8);
-        const speed = PORTRAIT_PARALLAX_SPEEDS[i] ?? 1;
-        const parallaxY = (0.45 - scrollProgress) * 26 * speed * w;
-        const entryY = (1 - w) * 22;
-        const totalY = entryY + parallaxY;
-        const scale = 0.94 + 0.06 * w;
+        const logo = FRAMEWORK_LOGOS[i];
+        // Staggered unfade window
+        const staggerReveal = smoothWindow(reveal, 0.08, 0.95);
+        const itemWeight = computeWordSmoothReveal(staggerReveal, i, totalLogos, 2.5);
+        const smoothProgress = easeOutCubic(itemWeight);
 
-        el.style.opacity = w.toFixed(3);
-        el.style.transform = `translate3d(0, ${totalY.toFixed(2)}px, 0) scale(${scale.toFixed(3)})`;
+        // Circular / Orbital entrance calculation:
+        // As itemWeight goes 0 -> 1:
+        // - Radius expands smoothly from center (inner core ~18% outward to target radius)
+        // - Spiral rotation winds from spinOffsetDeg into its target angleDeg
+        const spiralAngleDelta = (1 - smoothProgress) * logo.spinOffsetDeg;
+        // Subtle continuous ambient scroll orbit (turns slightly as user scrolls down the 180vh track)
+        const scrollOrbitOffsetDeg = (scrollProgress - 0.45) * 32 * logo.rotationSpeed;
+        
+        // Gentle micro-float harmonic wave over time
+        const wave = Math.sin(timeMs * 0.0015 + i * 1.1) * 4 * smoothProgress;
+
+        const currentAngleRad = ((logo.angleDeg + spiralAngleDelta + scrollOrbitOffsetDeg) * Math.PI) / 180;
+        
+        // Radius expansion factor
+        const radiusFactor = 0.22 + 0.78 * smoothProgress;
+        const targetRadiusX = (logo.radiusXPercent / 100) * (halfW - logo.size * 0.8) * radiusFactor;
+        const targetRadiusY = (logo.radiusYPercent / 100) * (halfH - logo.size * 0.8) * radiusFactor;
+
+        const posX = Math.cos(currentAngleRad) * targetRadiusX;
+        const posY = Math.sin(currentAngleRad) * targetRadiusY + wave;
+
+        // Smooth subtle scale & opacity
+        const scale = 0.5 + 0.5 * smoothProgress;
+        const opacity = itemWeight * itemWeight; // extra clean fade-in without pop
+
+        el.style.opacity = opacity.toFixed(3);
+        el.style.transform = `translate3d(${posX.toFixed(2)}px, ${posY.toFixed(2)}px, 0) scale(${scale.toFixed(3)})`;
       }
 
-      // 6. Staggered unfade + gentle full-page scroll parallax for 4 hiring notification bubbles
-      const totalBubbles = HIRING_NOTIFICATIONS.length;
-      for (let j = 0; j < totalBubbles; j++) {
-        const el = bubbleRefs.current[j];
-        if (!el) continue;
-
-        const staggerProgress = smoothWindow(reveal, 0.34, 1.0);
-        const w = computeWordSmoothReveal(staggerProgress, j, totalBubbles, 2.4);
-        const speed = BUBBLE_PARALLAX_SPEEDS[j] ?? 1;
-        const parallaxY = (0.45 - scrollProgress) * 20 * speed * w;
-        const entryY = (1 - w) * 16;
-        const totalY = entryY + parallaxY;
-        const scale = 0.95 + 0.05 * w;
-
-        el.style.opacity = w.toFixed(3);
-        el.style.transform = `translate3d(0, ${totalY.toFixed(2)}px, 0) scale(${scale.toFixed(3)})`;
-      }
-
-      // 7. Mobile / Tablet responsive grid unfade
-      if (mobileWrapRef.current) {
-        const mWeight = smoothWindow(reveal, 0.22, 0.85);
-        const mY = (1 - mWeight) * 18;
-        mobileWrapRef.current.style.opacity = mWeight.toFixed(3);
-        mobileWrapRef.current.style.transform = `translate3d(0, ${mY.toFixed(2)}px, 0)`;
-      }
-
-      // 8. Bottom progress indicator bar
+      // 6. Bottom progress indicator bar
       if (progressBarRef.current) {
         const barScale = clamp01(reveal * 0.35 + scrollProgress * 0.65);
         progressBarRef.current.style.transform = `scaleX(${barScale.toFixed(4)})`;
@@ -172,7 +269,7 @@ export function TeamSection({
       if (prefersReducedMotion) {
         currentReveal = targetReveal;
         currentScroll = targetScroll;
-        applyVisualFrame(currentReveal, currentScroll);
+        applyVisualFrame(currentReveal, currentScroll, now);
         rafId = null;
         lastTime = 0;
         return;
@@ -186,19 +283,18 @@ export function TeamSection({
       currentReveal += (targetReveal - currentReveal) * alphaReveal;
       currentScroll += (targetScroll - currentScroll) * alphaScroll;
 
-      if (
-        Math.abs(targetReveal - currentReveal) < 0.001 &&
-        Math.abs(targetScroll - currentScroll) < 0.001
-      ) {
-        currentReveal = targetReveal;
-        currentScroll = targetScroll;
-        applyVisualFrame(currentReveal, currentScroll);
-        rafId = null;
-        lastTime = 0;
+      const isStationary =
+        Math.abs(targetReveal - currentReveal) < 0.0008 &&
+        Math.abs(targetScroll - currentScroll) < 0.0008;
+
+      if (isStationary && currentReveal >= 0.999) {
+        // When settled and fully revealed, keep updating gently for harmonic micro-float while in view
+        applyVisualFrame(currentReveal, currentScroll, now);
+        rafId = window.requestAnimationFrame(tick);
         return;
       }
 
-      applyVisualFrame(currentReveal, currentScroll);
+      applyVisualFrame(currentReveal, currentScroll, now);
       rafId = window.requestAnimationFrame(tick);
     };
 
@@ -229,7 +325,7 @@ export function TeamSection({
       if (immediate && prefersReducedMotion) {
         currentReveal = targetReveal;
         currentScroll = targetScroll;
-        applyVisualFrame(currentReveal, currentScroll);
+        applyVisualFrame(currentReveal, currentScroll, performance.now());
         return;
       }
 
@@ -255,7 +351,7 @@ export function TeamSection({
     );
     if (trackEl) io.observe(trackEl);
 
-    applyVisualFrame(0, 0);
+    applyVisualFrame(0, 0, 0);
     evaluateScroll(true);
 
     const onScrollOrResize = () => evaluateScroll(false);
@@ -280,6 +376,15 @@ export function TeamSection({
     refWithHook.__reevaluate?.();
   }, [isDarkMode]);
 
+  const scrollToPortfolio = () => {
+    if (onOpenCareersModal) {
+      onOpenCareersModal();
+      return;
+    }
+    const el = document.getElementById('portfolio');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section
       ref={trackRef}
@@ -292,7 +397,7 @@ export function TeamSection({
       aria-labelledby="equipo-heading"
       className="relative w-full bg-transparent lg:h-[180vh] transition-colors duration-500 ease-out"
     >
-      {/* Full-Page 100svh Sticky Stage matching "Site-uri responsive" */}
+      {/* Full-Page 100svh Sticky Stage */}
       <div className="sticky top-0 w-full min-h-[100svh] lg:h-[100svh] px-6 md:px-12 py-16 lg:py-0 overflow-hidden flex flex-col items-center justify-center">
         {/* Subtle architectural dashed grid across the full-page stage */}
         <div
@@ -314,60 +419,38 @@ export function TeamSection({
         <div
           ref={stageContentRef}
           style={{ visibility: 'hidden', pointerEvents: 'none' }}
-          className="relative w-full max-w-[1400px] mx-auto lg:h-[calc(100svh-3rem)] lg:min-h-[640px] lg:max-h-[860px] flex flex-col items-center justify-center"
+          className="relative w-full max-w-[1400px] mx-auto min-h-[560px] lg:h-[calc(100svh-3rem)] lg:min-h-[640px] lg:max-h-[860px] flex flex-col items-center justify-center select-none"
         >
-          {/* Desktop Floating Team Portraits (6 members around the full-page stage) */}
-          {TEAM_MEMBERS.map((member, idx) => (
-            <button
-              key={member.id}
-              ref={(el) => {
-                portraitRefs.current[idx] = el;
-              }}
-              type="button"
-              onClick={() => onOpenCareersModal()}
-              aria-label={`${member.name} — ${member.specialty}`}
-              style={{
-                opacity: 0,
-                transform: 'translate3d(0, 22px, 0) scale(0.94)',
-              }}
-              className={`hidden lg:flex flex-col items-start absolute ${member.positionClass} z-10 group cursor-pointer text-left will-change-[transform,opacity]`}
-            >
-              <div className="w-[94px] h-[94px] rounded-[18px] p-1.5 bg-white border border-neutral-100 shadow-[0_10px_28px_rgba(0,0,0,0.06)] overflow-hidden transition-transform duration-300 group-hover:-translate-y-1">
+          {/* Circular Orbit Floating Framework Logos (Center-referenced, spiral entrance, no backgrounds) */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            {FRAMEWORK_LOGOS.map((item, idx) => (
+              <div
+                key={item.id}
+                ref={(el) => {
+                  logoRefs.current[idx] = el;
+                }}
+                style={{
+                  opacity: 0,
+                  transform: 'translate3d(0, 0, 0) scale(0.5)',
+                }}
+                className="absolute pointer-events-none will-change-[transform,opacity] flex items-center justify-center"
+              >
                 <img
-                  src={member.avatar}
-                  alt={member.name}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover rounded-[13px]"
+                  src={item.src}
+                  alt={item.name}
+                  loading="lazy"
+                  decoding="async"
+                  style={{
+                    width: `${item.size}px`,
+                    height: `${item.size}px`,
+                  }}
+                  className="object-contain filter drop-shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:scale-115 transition-transform duration-300"
                 />
               </div>
-              <span className="mt-2 pl-0.5 text-[9.5px] font-mono-code font-medium tracking-[0.04em] uppercase leading-[1.2] whitespace-pre-line text-[#141517] dark:text-white transition-colors duration-500 ease-out">
-                {member.role}
-              </span>
-            </button>
-          ))}
+            ))}
+          </div>
 
-          {/* Desktop Floating Hiring Notification Bubbles (4 bubbles around the full-page stage) */}
-          {HIRING_NOTIFICATIONS.map((job, idx) => (
-            <div
-              key={job.id}
-              ref={(el) => {
-                bubbleRefs.current[idx] = el;
-              }}
-              style={{
-                opacity: 0,
-                transform: 'translate3d(0, 16px, 0) scale(0.95)',
-              }}
-              className={`hidden lg:block absolute ${BUBBLE_POSITIONS[idx]} z-20 will-change-[transform,opacity]`}
-            >
-              <OnlinesNotificationBubble
-                timeAgo={job.timeAgo}
-                message={job.title}
-                onClick={() => onOpenCareersModal(job)}
-              />
-            </div>
-          ))}
-
-          {/* Center Minimalist Headline + Single Royal-Blue Pill CTA */}
+          {/* Center Minimalist Headline + Royal-Blue Pill CTA */}
           <div className="relative z-20 text-center px-4 max-w-[1280px] lg:translate-y-1">
             <div
               ref={headlineWrapRef}
@@ -377,12 +460,15 @@ export function TeamSection({
               }}
               className="will-change-[transform,opacity]"
             >
+              <p className="text-[12px] font-mono-code uppercase tracking-[0.24em] text-[#0D5FF9] font-semibold mb-3">
+                Tehnologii moderne & cod curat
+              </p>
               <h2
                 id="equipo-heading"
-                className="text-[clamp(2rem,4.1vw,3.85rem)] font-extrabold tracking-[-0.04em] leading-[1.12] text-[#141517] dark:text-white transition-colors duration-500 ease-out xl:whitespace-nowrap"
+                className="text-[clamp(2rem,4.1vw,3.85rem)] font-extrabold tracking-[-0.04em] leading-[1.14] text-[#141517] dark:text-white transition-colors duration-500 ease-out"
               >
-                <span>O agenție construită pe </span>
-                <span className="relative inline-block bg-[#0D5FF9]/[0.16] px-3 py-1">
+                <span>O arhitectură construită pe </span>
+                <span className="relative inline-block bg-[#0D5FF9]/[0.14] px-3 py-1">
                   {/* Left Selection Handle */}
                   <span
                     ref={highlightHandleLeftRef}
@@ -393,7 +479,7 @@ export function TeamSection({
                     <span className="absolute -top-1.5 -left-[4.75px] w-3 h-3 rounded-full bg-[#0D5FF9]" />
                   </span>
 
-                  claritate și meșteșug.
+                  performanță și claritate.
 
                   {/* Right Selection Handle */}
                   <span
@@ -418,57 +504,11 @@ export function TeamSection({
             >
               <button
                 type="button"
-                onClick={() => onOpenCareersModal()}
-                className="px-11 py-3.5 rounded-full bg-[#0D5FF9] hover:bg-[#004AD9] text-white text-[14.5px] font-semibold tracking-tight transition-colors duration-200 whitespace-nowrap shrink-0 cursor-pointer"
+                onClick={scrollToPortfolio}
+                className="px-10 py-3.5 rounded-full bg-[#0D5FF9] hover:bg-[#004AD9] text-white text-[14.5px] font-semibold tracking-tight transition-all duration-200 shadow-[0_8px_20px_rgba(13,95,249,0.24)] hover:shadow-[0_12px_28px_rgba(13,95,249,0.32)] hover:-translate-y-0.5 whitespace-nowrap shrink-0 cursor-pointer pointer-events-auto"
               >
-                Vezi roluri deschise
+                Vezi proiectele realizate
               </button>
-            </div>
-          </div>
-
-          {/* Mobile / Tablet Responsive Grid */}
-          <div
-            ref={mobileWrapRef}
-            style={{
-              opacity: 0,
-              transform: 'translate3d(0, 18px, 0)',
-            }}
-            className="lg:hidden mt-12 w-full max-w-xl space-y-6 will-change-[transform,opacity]"
-          >
-            <div className="grid grid-cols-3 gap-4 justify-items-center">
-              {TEAM_MEMBERS.map((member) => (
-                <button
-                  key={member.id}
-                  type="button"
-                  onClick={() => onOpenCareersModal()}
-                  aria-label={`${member.name} — ${member.specialty}`}
-                  className="flex flex-col items-start text-left cursor-pointer"
-                >
-                  <div className="w-[82px] h-[82px] rounded-[16px] p-1.5 bg-white border border-neutral-100 shadow-sm overflow-hidden">
-                    <img
-                      src={member.avatar}
-                      alt={member.name}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover rounded-[12px]"
-                    />
-                  </div>
-                  <span className="mt-1.5 text-[9px] font-mono-code uppercase leading-[1.2] whitespace-pre-line text-[#141517]">
-                    {member.role}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {HIRING_NOTIFICATIONS.map((job) => (
-                <OnlinesNotificationBubble
-                  key={job.id}
-                  compact
-                  timeAgo={job.timeAgo}
-                  message={job.title}
-                  onClick={() => onOpenCareersModal(job)}
-                />
-              ))}
             </div>
           </div>
         </div>

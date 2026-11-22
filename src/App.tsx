@@ -131,19 +131,17 @@ export default function App() {
   return (
     <div
       data-theme-mode={effectiveDarkMode ? 'dark' : 'light'}
-      className={`min-h-screen transition-colors duration-500 ease-out ${
-        effectiveDarkMode
+      className={`min-h-screen transition-colors duration-500 ease-out ${effectiveDarkMode
           ? 'bg-[#050505] text-white'
           : 'bg-white text-[#141517]'
-      }`}
+        }`}
     >
       {/* Sticky 3-Zone Top Bar (Shared Across All Routes) */}
       <header
-        className={`fixed top-0 inset-x-0 z-40 flex items-center justify-between gap-8 px-6 md:px-10 py-4 backdrop-blur-md border-b transition-colors duration-500 ease-out ${
-          effectiveDarkMode
+        className={`fixed top-0 inset-x-0 z-40 flex items-center justify-between gap-8 px-6 md:px-10 py-4 backdrop-blur-md border-b transition-colors duration-500 ease-out ${effectiveDarkMode
             ? 'bg-[#050505]/85 border-white/10'
             : 'bg-white/85 border-neutral-100/80'
-        }`}
+          }`}
       >
         {/* Zone 1: Single text element wordmark (morphs between 'rogrowth.ro' and "'_" on scroll) */}
         <a
@@ -153,9 +151,8 @@ export default function App() {
             navigateToRoute('/');
           }}
           aria-label="RoGrowth.ro Acasă"
-          className={`text-[20px] font-extrabold tracking-[-0.04em] whitespace-nowrap shrink-0 ${
-            effectiveDarkMode ? 'text-white' : 'text-[#141517]'
-          }`}
+          className={`text-[20px] font-extrabold tracking-[-0.04em] whitespace-nowrap shrink-0 ${effectiveDarkMode ? 'text-white' : 'text-[#141517]'
+            }`}
         >
           {scrolled ? "'_" : 'rogrowth.ro'}
         </a>
@@ -163,9 +160,8 @@ export default function App() {
         {/* Zone 2: 5 concise single-line text navigation links */}
         <nav
           aria-label="Navigare principală RoGrowth.ro"
-          className={`hidden md:flex items-center gap-7 text-[13px] font-medium ${
-            effectiveDarkMode ? 'text-neutral-400' : 'text-neutral-500'
-          }`}
+          className={`hidden md:flex items-center gap-7 text-[13px] font-medium ${effectiveDarkMode ? 'text-neutral-400' : 'text-neutral-500'
+            }`}
         >
           <a
             href="/creare-siteweb"
@@ -173,13 +169,11 @@ export default function App() {
               e.preventDefault();
               navigateToRoute('/creare-siteweb');
             }}
-            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${
-              effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
-            } ${
-              currentRoute === '/creare-siteweb'
+            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
+              } ${currentRoute === '/creare-siteweb'
                 ? 'text-[#0D5FF9] font-semibold underline'
                 : ''
-            }`}
+              }`}
           >
             Creare Site Web
           </a>
@@ -194,20 +188,18 @@ export default function App() {
                 handleSectionNavClick(e, 'metodologia');
               }
             }}
-            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${
-              effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
-            }`}
+            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
+              }`}
           >
-            Prețuri & Flux
+            Servicii
           </a>
           <a
             href="#equipo"
             onClick={(e) => handleSectionNavClick(e, 'equipo')}
-            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${
-              effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
-            }`}
+            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
+              }`}
           >
-            Echipă & Valori
+            Echipă
           </a>
           <a
             href={currentRoute === '/creare-siteweb' ? '#referinte-portofoliu' : '#portfolio'}
@@ -220,9 +212,8 @@ export default function App() {
                 handleSectionNavClick(e, 'portfolio');
               }
             }}
-            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${
-              effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
-            }`}
+            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
+              }`}
           >
             Portofoliu
           </a>
@@ -232,13 +223,11 @@ export default function App() {
               e.preventDefault();
               navigateToRoute('/design-system');
             }}
-            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${
-              effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
-            } ${
-              currentRoute === '/design-system'
+            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
+              } ${currentRoute === '/design-system'
                 ? 'text-[#0D5FF9] font-semibold underline'
                 : ''
-            }`}
+              }`}
           >
             Sistem UI
           </a>
@@ -249,11 +238,10 @@ export default function App() {
           <button
             type="button"
             onClick={() => handleOpenContact()}
-            className={`px-5 py-2 text-[13px] font-semibold text-white rounded-full transition-colors duration-300 whitespace-nowrap shrink-0 cursor-pointer ${
-              effectiveDarkMode
+            className={`px-5 py-2 text-[13px] font-semibold text-white rounded-full transition-colors duration-300 whitespace-nowrap shrink-0 cursor-pointer ${effectiveDarkMode
                 ? 'bg-[#0D5FF9] hover:bg-[#256EFF]'
                 : 'bg-[#141517] hover:bg-[#0D5FF9]'
-            }`}
+              }`}
           >
             Cere o ofertă
           </button>
@@ -305,19 +293,18 @@ export default function App() {
             {/* 2B. Scroll-Driven Crossover Typography & 3-Image Parallax Showcase ("Ninety minutes") */}
             <CrossoverTextSection isDarkMode={effectiveDarkMode} />
 
-            {/* 3. Dark Mode Immersion ("Ziua 1, nu Ziua 100" + 4-Step Workflow & Anti-Slop Accordion) */}
+            {/* 3. Methodology ("Ziua 1, nu Ziua 100" + 4-Step Transparent Workflow) */}
             <DarkMethodologySection
               onOpenContact={handleOpenContact}
-              onDarkModeChange={setIsDarkSectionActive}
             />
 
-            {/* 4. Team & Capabilities ("O agenție construită pe claritate și meșteșug.") */}
+            {/* 4. Team & Frameworks Architecture ("O arhitectură construită pe performanță și claritate.") */}
             <TeamSection
               onOpenCareersModal={handleOpenCareers}
-              isDarkMode={effectiveDarkMode}
+              isDarkMode={false}
             />
 
-            {/* 5. Craft ("Detaliile fac diferența"), Tech Stack Strip & Diagonal Cascading Solutions */}
+            {/* 5. Real Portfolio Projects & Case Studies Showcase */}
             <DetailsAndPortfolioSection
               onSelectProject={(project) => setSelectedProject(project)}
             />

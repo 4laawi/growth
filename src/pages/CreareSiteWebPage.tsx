@@ -22,6 +22,7 @@ import {
   buildCreareSiteWebJsonLd,
 } from '../data/creareSiteWebData';
 import ArcCardCarousel from '../components/ui/arc-card-carousel';
+import { RoGrowthWordmarkFooter } from '../components/ui/wordmark-footer';
 import { StaggerTestimonialsSection } from '../components/ui/stagger-testimonials';
 import { FigmaFramerShowcaseSection } from '../components/ui/figma-framer-showcase';
 import {
@@ -151,12 +152,10 @@ export function CreareSiteWebPage({
   const currentProgressRef = useRef(0);
   const rafIdRef = useRef<number | null>(null);
 
-  // Scroll-driven Dark Mode refs & state for Block 03 (#standard-tehnic-seo) & Block 05 (#proprietate-si-faq)
+  // Scroll-driven Dark Mode refs & state for Block 03 (#standard-tehnic-seo)
   const anatomySectionRef = useRef<HTMLElement>(null);
-  const faqSectionRef = useRef<HTMLElement>(null);
   const [localDarkMode, setLocalDarkMode] = useState(false);
   const [anatomyPhase, setAnatomyPhase] = useState<'before' | 'entering' | 'active' | 'exiting' | 'after'>('before');
-  const [faqPhase, setFaqPhase] = useState<'before' | 'entering' | 'active' | 'exiting' | 'after'>('before');
 
   // Featherlight section reveals for main content blocks
   const { ref: pricingRevealRef, isRevealed: isPricingVisible } = useSectionReveal<HTMLDivElement>();
@@ -223,9 +222,9 @@ export function CreareSiteWebPage({
 
         setScrollState((prev) =>
           prev.revealedWords === next.revealedWords &&
-          Math.abs(prev.progress - next.progress) < 0.004 &&
-          prev.isActive === next.isActive &&
-          prev.isComplete === next.isComplete
+            Math.abs(prev.progress - next.progress) < 0.004 &&
+            prev.isActive === next.isActive &&
+            prev.isComplete === next.isComplete
             ? prev
             : next
         );
@@ -238,19 +237,13 @@ export function CreareSiteWebPage({
         }
       }
 
-      // 2. Update unified Page Dark Mode state across Block 03 & Block 05
+      // 2. Update unified Page Dark Mode state for Block 03 (#standard-tehnic-seo)
       const bounds: Array<{ top: number; bottom: number }> = [];
       if (anatomySectionRef.current) {
         const r1 = anatomySectionRef.current.getBoundingClientRect();
         bounds.push({ top: r1.top, bottom: r1.bottom });
         const st1 = computeDarkModeScrollState(r1.top, r1.bottom, viewportH);
         setAnatomyPhase((prev) => (prev === st1.phase ? prev : st1.phase));
-      }
-      if (faqSectionRef.current) {
-        const r2 = faqSectionRef.current.getBoundingClientRect();
-        bounds.push({ top: r2.top, bottom: r2.bottom });
-        const st2 = computeDarkModeScrollState(r2.top, r2.bottom, viewportH);
-        setFaqPhase((prev) => (prev === st2.phase ? prev : st2.phase));
       }
 
       if (bounds.length > 0) {
@@ -369,13 +362,12 @@ export function CreareSiteWebPage({
         id="creare-site-hero"
         data-theme-section="true"
         aria-label="Creare site web profesional RoGrowth.ro"
-        className={`relative min-h-[820px] lg:h-[880px] w-full overflow-hidden flex flex-col items-center justify-center pt-20 pb-20 transition-colors duration-500 ease-out ${
-          studioMode && showGrid
+        className={`relative min-h-[820px] lg:h-[880px] w-full overflow-hidden flex flex-col items-center justify-center pt-20 pb-20 transition-colors duration-500 ease-out ${studioMode && showGrid
             ? effectiveDark
               ? 'bg-transparent'
               : 'bg-onlines-grid'
             : 'bg-transparent'
-        }`}
+          }`}
       >
         {/* Top Mod Studio Toggle */}
         <div className="relative z-30 mb-8 md:mb-10 flex flex-col items-center">
@@ -392,14 +384,12 @@ export function CreareSiteWebPage({
               aria-checked={studioMode}
               aria-labelledby="creare-studio-mode-label"
               onClick={() => setStudioMode((prev) => !prev)}
-              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0D5FF9] ${
-                studioMode ? 'bg-[#0D5FF9]' : 'bg-neutral-200'
-              }`}
+              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0D5FF9] ${studioMode ? 'bg-[#0D5FF9]' : 'bg-neutral-200'
+                }`}
             >
               <span
-                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out ${
-                  studioMode ? 'translate-x-5' : 'translate-x-0'
-                }`}
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out ${studioMode ? 'translate-x-5' : 'translate-x-0'
+                  }`}
               />
             </button>
           </div>
@@ -580,9 +570,8 @@ export function CreareSiteWebPage({
             {ROGROWTH_GUARANTEE_METRICS.map((metric, idx) => (
               <div
                 key={metric.id}
-                className={`${
-                  idx > 0 ? 'pt-4 md:pt-0 md:pl-6' : ''
-                } flex flex-col justify-between`}
+                className={`${idx > 0 ? 'pt-4 md:pt-0 md:pl-6' : ''
+                  } flex flex-col justify-between`}
               >
                 <dt className="text-[11px] font-mono-code uppercase tracking-wider text-[#0D5FF9] dark:text-[#7DD3FC] transition-colors duration-500">
                   {metric.label}
@@ -674,8 +663,8 @@ export function CreareSiteWebPage({
                   const activeColor = isAccent
                     ? '#0D5FF9'
                     : effectiveDark
-                    ? '#FFFFFF'
-                    : '#141517';
+                      ? '#FFFFFF'
+                      : '#141517';
 
                   return (
                     <React.Fragment key={idx}>
@@ -726,11 +715,10 @@ export function CreareSiteWebPage({
                           opacity: Number(opacity.toFixed(3)),
                           transform: `translate3d(0, ${translateY.toFixed(2)}px, 0)`,
                         }}
-                        className={`inline-block will-change-[transform,opacity] transition-colors duration-500 ${
-                          weight > 0.4
+                        className={`inline-block will-change-[transform,opacity] transition-colors duration-500 ${weight > 0.4
                             ? 'text-neutral-700 dark:text-neutral-200'
                             : 'text-neutral-500 dark:text-neutral-400'
-                        }`}
+                          }`}
                       >
                         {word}
                       </span>{' '}
@@ -768,11 +756,10 @@ export function CreareSiteWebPage({
         <div
           id="grila-preturi-site"
           ref={pricingRevealRef}
-          className={`max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 pt-8 pb-20 transition-all duration-700 ease-out ${
-            isPricingVisible
+          className={`max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 pt-8 pb-20 transition-all duration-700 ease-out ${isPricingVisible
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-4'
-          }`}
+            }`}
         >
           <SectionHeader
             eyebrow="Prețuri Fixe Agreate în Scris · 0 Costuri Ascunse"
@@ -788,11 +775,10 @@ export function CreareSiteWebPage({
                 style={{
                   transitionDelay: `${computeStaggerDelayMs(idx, 90, 270)}ms`,
                 }}
-                className={`transition-all duration-700 ease-out ${
-                  isPricingVisible
+                className={`transition-all duration-700 ease-out ${isPricingVisible
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-4'
-                }`}
+                  }`}
               >
                 <PricingTierCard
                   card={card}
@@ -851,11 +837,10 @@ export function CreareSiteWebPage({
         <div
           id="tipuri-site"
           ref={typesRevealRef}
-          className={`max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-28 border-t border-neutral-100 dark:border-white/10 transition-all duration-700 ease-out ${
-            isTypesVisible
+          className={`max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-28 border-t border-neutral-100 dark:border-white/10 transition-all duration-700 ease-out ${isTypesVisible
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-4'
-          }`}
+            }`}
         >
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 pt-8">
             <SectionHeader
@@ -884,16 +869,14 @@ export function CreareSiteWebPage({
                   role="tab"
                   aria-selected={isSelected}
                   onClick={() => setActiveWebsiteTypeIdx(idx)}
-                  className={`px-3 py-2.5 rounded-xl text-xs font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer flex items-center justify-center gap-1.5 ${
-                    isSelected
+                  className={`px-3 py-2.5 rounded-xl text-xs font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer flex items-center justify-center gap-1.5 ${isSelected
                       ? 'bg-[#141517] dark:bg-[#0D5FF9] text-white shadow-sm'
                       : 'text-neutral-600 dark:text-neutral-300 hover:text-[#141517] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10'
-                  }`}
+                    }`}
                 >
                   <span
-                    className={`font-mono-code text-[11px] ${
-                      isSelected ? 'text-[#7DD3FC]' : 'text-neutral-400'
-                    }`}
+                    className={`font-mono-code text-[11px] ${isSelected ? 'text-[#7DD3FC]' : 'text-neutral-400'
+                      }`}
                   >
                     {typeItem.index}.
                   </span>
@@ -996,18 +979,16 @@ export function CreareSiteWebPage({
         data-theme-section="true"
         data-dark-phase={anatomyPhase}
         aria-labelledby="anatomy-heading"
-        className={`py-24 md:py-32 px-6 md:px-12 lg:px-20 transition-colors duration-500 ease-out ${
-          effectiveDark ? 'bg-transparent text-white' : 'bg-transparent text-[#141517]'
-        }`}
+        className={`py-24 md:py-32 px-6 md:px-12 lg:px-20 transition-colors duration-500 ease-out ${effectiveDark ? 'bg-transparent text-white' : 'bg-transparent text-[#141517]'
+          }`}
       >
         <div className="max-w-[1240px] mx-auto space-y-16">
           {/* Top Obsidian Container: 4-Pillar Selector + Live MacBook Frame */}
           <div
-            className={`rounded-[28px] p-8 md:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center overflow-hidden border transition-all duration-500 ease-out ${
-              effectiveDark
+            className={`rounded-[28px] p-8 md:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center overflow-hidden border transition-all duration-500 ease-out ${effectiveDark
                 ? 'bg-[#131417] border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.45)]'
                 : 'bg-[#131417] border-neutral-800/80 shadow-[0_24px_60px_rgba(20,21,23,0.16)]'
-            }`}
+              }`}
           >
             {/* Left Column: 4 Technical & Commercial Standards */}
             <div className="lg:col-span-6 space-y-6">
@@ -1036,19 +1017,17 @@ export function CreareSiteWebPage({
                       key={pillar.step}
                       type="button"
                       onClick={() => setActiveAnatomyIdx(idx)}
-                      className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-4 ${
-                        isActive
+                      className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-4 ${isActive
                           ? 'bg-[#0D5FF9]/15 border-[#0D5FF9] text-white'
                           : 'bg-white/[0.03] border-white/10 text-neutral-300 hover:border-white/25'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <span
-                          className={`text-xs font-mono-code font-bold px-2 py-1 rounded ${
-                            isActive
+                          className={`text-xs font-mono-code font-bold px-2 py-1 rounded ${isActive
                               ? 'bg-[#0D5FF9] text-white'
                               : 'bg-white/10 text-neutral-400'
-                          }`}
+                            }`}
                         >
                           {pillar.step}
                         </span>
@@ -1108,11 +1087,10 @@ export function CreareSiteWebPage({
                       key={p.step}
                       type="button"
                       onClick={() => setActiveAnatomyIdx(idx)}
-                      className={`px-2 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
-                        activeAnatomyIdx === idx
+                      className={`px-2 py-1.5 rounded-md text-left transition-colors cursor-pointer ${activeAnatomyIdx === idx
                           ? 'bg-white text-[#0D5FF9] font-semibold'
                           : 'bg-white/10 text-white/80 hover:bg-white/20'
-                      }`}
+                        }`}
                     >
                       <span className="block text-[10px] font-mono-code leading-none mb-0.5">
                         {p.step}
@@ -1147,11 +1125,10 @@ export function CreareSiteWebPage({
                       key={tech.id}
                       type="button"
                       onClick={() => setActiveTechIdx(idx)}
-                      className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
-                        isSelected
+                      className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${isSelected
                           ? 'bg-[#0D5FF9] text-white'
                           : 'bg-white/[0.05] text-neutral-300 hover:bg-white/10'
-                      }`}
+                        }`}
                     >
                       {tech.name}
                     </button>
@@ -1198,11 +1175,10 @@ export function CreareSiteWebPage({
         ref={portfolioRevealRef}
         data-theme-section="true"
         aria-labelledby="creare-portfolio-heading"
-        className={`bg-transparent py-24 px-6 md:px-12 lg:px-16 max-w-[1380px] mx-auto transition-all duration-700 ease-out ${
-          isPortfolioVisible
+        className={`bg-transparent py-24 px-6 md:px-12 lg:px-16 max-w-[1380px] mx-auto transition-all duration-700 ease-out ${isPortfolioVisible
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-4'
-        }`}
+          }`}
       >
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
           <SectionHeader
@@ -1225,11 +1201,10 @@ export function CreareSiteWebPage({
                 key={tab.id}
                 type="button"
                 onClick={() => setPortfolioFilter(tab.id)}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                  portfolioFilter === tab.id
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${portfolioFilter === tab.id
                     ? 'bg-[#141517] dark:bg-[#0D5FF9] text-white shadow-sm'
                     : 'text-neutral-600 dark:text-neutral-300 hover:text-[#141517] dark:hover:text-white'
-                }`}
+                  }`}
               >
                 {tab.label}
               </button>
@@ -1244,11 +1219,10 @@ export function CreareSiteWebPage({
               style={{
                 transitionDelay: `${computeStaggerDelayMs(idx, 75, 300)}ms`,
               }}
-              className={`transition-all duration-700 ease-out ${
-                isPortfolioVisible
+              className={`transition-all duration-700 ease-out ${isPortfolioVisible
                   ? 'opacity-100 translate-y-0'
                   : 'opacity-0 translate-y-4'
-              }`}
+                }`}
             >
               <BrowserProjectCard
                 project={project}
@@ -1265,41 +1239,31 @@ export function CreareSiteWebPage({
       <StaggerTestimonialsSection />
 
       {/* =====================================================================
-          BLOCK 05 — COMMERCIAL TRANSPARENCY, OWNERSHIP & ELECTRIC FAQ (Scroll-Driven Dark Mode Sync)
+          BLOCK 05 — COMMERCIAL TRANSPARENCY, OWNERSHIP & MINIMAL FAQ
       ===================================================================== */}
       <section
         id="proprietate-si-faq"
-        ref={faqSectionRef}
         data-theme-section="true"
-        data-dark-phase={faqPhase}
         aria-labelledby="ownership-faq-heading"
-        className={`py-24 px-6 md:px-12 lg:px-20 transition-colors duration-500 ease-out ${
-          effectiveDark ? 'bg-transparent text-white' : 'bg-transparent text-[#141517]'
-        }`}
+        className="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-transparent text-[#141517] transition-colors duration-500 ease-out"
       >
         <div className="max-w-[1240px] mx-auto">
-          <div
-            className={`rounded-[32px] bg-[#0B0C0E] p-8 md:p-12 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch border transition-all duration-500 ease-out ${
-              effectiveDark
-                ? 'border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.45)]'
-                : 'border-neutral-800/80 shadow-[0_24px_60px_rgba(20,21,23,0.16)]'
-            }`}
-          >
+          <div className="rounded-[32px] bg-neutral-50/70 border border-neutral-200/80 p-8 md:p-12 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
             {/* Left Column: Anti-Lock-In & Ownership Rules + Core Web Vitals Card */}
             <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
-              <div className="space-y-5">
-                <div className="text-xs font-mono-code tracking-wide text-[#7DD3FC]">
+              <div className="space-y-4">
+                <div className="text-[11px] font-mono-code uppercase tracking-wider text-neutral-500 font-semibold">
                   Drepturi Depline ale Clientului · Fără Vendor Lock-In
                 </div>
 
                 <h2
                   id="ownership-faq-heading"
-                  className="text-[clamp(2rem,3.6vw,3.1rem)] font-bold tracking-[-0.035em] leading-[1.06] text-white text-balance"
+                  className="text-[clamp(1.9rem,3.2vw,2.75rem)] font-bold tracking-[-0.035em] leading-[1.1] text-[#141517] text-balance"
                 >
                   100% Codul Tău. 0% Dependență Forțată.
                 </h2>
 
-                <p className="text-[14px] md:text-[15px] text-neutral-300 leading-[1.65]">
+                <p className="text-[14px] md:text-[15px] text-neutral-600 leading-[1.65]">
                   Domeniul web (.ro, .com) se înregistrează strict pe numele companiei tale. La plata finală primești tot codul sursă, baza de date și activele grafice. Poți găzdui site-ul pe propriul server sau prin serviciul administrat RoGrowth (uptime, securitate, backup-uri).
                 </p>
 
@@ -1310,9 +1274,9 @@ export function CreareSiteWebPage({
                       'Site de prezentare simplu (€300 – €400)'
                     )
                   }
-                  className="group inline-flex items-center gap-3 pt-1 text-[14px] font-semibold text-white hover:text-[#7DD3FC] transition-colors cursor-pointer"
+                  className="group inline-flex items-center gap-2.5 pt-1 text-[14px] font-semibold text-[#141517] hover:text-[#0D5FF9] transition-colors cursor-pointer"
                 >
-                  <span className="w-6 h-6 rounded-full bg-[#FF6B2C] text-black flex items-center justify-center transition-transform group-hover:translate-x-1">
+                  <span className="w-6 h-6 rounded-full bg-neutral-100 group-hover:bg-[#0D5FF9] group-hover:text-white text-[#141517] flex items-center justify-center transition-all group-hover:translate-x-0.5">
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                   <span>Ai o întrebare tehnică? Scrie-ne direct</span>
@@ -1320,14 +1284,15 @@ export function CreareSiteWebPage({
               </div>
 
               <CoreWebVitalsCard
-                previewImage="/assets/aistudio/dentalcrownhealth_1219211c.webp"
-                previewAlt="Dental Crown Health (dentalcrownhealth.ro) — Performanță 100/100 și 100% proprietate client"
+                mode="light"
+                previewImage="/assets/aistudio/ekonstudio_showcase.webp"
+                previewAlt="Standard Tehnic RoGrowth — EKON Studio — 100% proprietate client și performanță maximă"
               />
             </div>
 
-            {/* Right Column: Electric-Blue (#1D1CFF) Commercial & SEO FAQ Accordion */}
+            {/* Right Column: Minimalist Commercial & SEO FAQ Accordion */}
             <div className="lg:col-span-7 flex flex-col justify-center">
-              <ElectricFaqAccordion items={CREARE_SITE_FAQ_ITEMS} />
+              <ElectricFaqAccordion items={CREARE_SITE_FAQ_ITEMS} variant="minimal" />
             </div>
           </div>
         </div>
@@ -1341,11 +1306,10 @@ export function CreareSiteWebPage({
         ref={quoteRevealRef}
         data-theme-section="true"
         aria-labelledby="creare-oferta-heading"
-        className={`py-24 px-6 md:px-12 lg:px-16 max-w-[1340px] mx-auto bg-transparent transition-all duration-700 ease-out ${
-          isQuoteVisible
+        className={`py-24 px-6 md:px-12 lg:px-16 max-w-[1340px] mx-auto bg-transparent transition-all duration-700 ease-out ${isQuoteVisible
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-4'
-        }`}
+          }`}
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           {/* Left Column: Dot-Matrix Studio Collage (.bg-onlines-dots) */}
@@ -1655,45 +1619,22 @@ export function CreareSiteWebPage({
         </div>
       </section>
 
-      {/* Minimalist Monospace Footer */}
-      <footer
+      {/* Branded Wordmark Footer */}
+      <RoGrowthWordmarkFooter
         data-theme-section="true"
-        className="border-t border-neutral-100 dark:border-white/10 pt-8 pb-24 px-6 md:px-48 text-center bg-transparent transition-colors duration-500 ease-out"
-      >
-        <div className="max-w-[1360px] mx-auto flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[10px] md:text-[11px] font-mono-code tracking-wider uppercase text-neutral-400">
-          <span>
-            ©2026 ROGROWTH.RO — CREARE SITE WEB & AGENȚIE MARKETING DIGITAL. BUCUREȘTI, ROMÂNIA (ACOPERIRE NAȚIONALĂ). 100% PROPRIETATEA CLIENTULUI.
-          </span>
-          <button
-            type="button"
-            onClick={onNavigateHome}
-            className="underline hover:text-[#141517] dark:hover:text-white transition-colors uppercase cursor-pointer whitespace-nowrap"
-          >
-            ACASĂ (ROGROWTH.RO)
-          </button>
-          <button
-            type="button"
-            onClick={onNavigateDesignSystem}
-            className="underline hover:text-[#0D5FF9] dark:hover:text-[#7DD3FC] transition-colors uppercase cursor-pointer whitespace-nowrap"
-          >
-            SISTEM UI
-          </button>
-          <button
-            type="button"
-            onClick={() => onOpenLegalModal('terminos')}
-            className="underline hover:text-[#141517] dark:hover:text-white transition-colors uppercase cursor-pointer whitespace-nowrap"
-          >
-            TERMENI COMERCIALI
-          </button>
-          <button
-            type="button"
-            onClick={() => onOpenLegalModal('privacidad')}
-            className="underline hover:text-[#141517] dark:hover:text-white transition-colors uppercase cursor-pointer whitespace-nowrap"
-          >
-            CONFIDENȚIALITATE
-          </button>
-        </div>
-      </footer>
+        onOpenLegalModal={onOpenLegalModal}
+        onNavigate={(path) => {
+          if (path === '/creare-siteweb') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (path === '/design-system') {
+            onNavigateDesignSystem();
+          } else if (path === '/' || path === '') {
+            onNavigateHome();
+          } else if (typeof window !== 'undefined') {
+            window.location.href = path;
+          }
+        }}
+      />
 
       {/* Popover input for adding a canvas comment */}
       {showCommentInput && (
@@ -1751,11 +1692,10 @@ export function CreareSiteWebPage({
           type="button"
           onClick={() => setShowGrid((prev) => !prev)}
           aria-label="Comută grila arhitecturală"
-          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
-            showGrid
+          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer ${showGrid
               ? 'bg-neutral-100 text-[#0D5FF9]'
               : 'text-neutral-400 hover:bg-neutral-100'
-          }`}
+            }`}
         >
           <Grid className="w-3.5 h-3.5" />
         </button>
@@ -1763,11 +1703,10 @@ export function CreareSiteWebPage({
           type="button"
           onClick={() => setShowCommentInput((prev) => !prev)}
           aria-label="Adaugă comentariu pe canvas"
-          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
-            showCommentInput
+          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer ${showCommentInput
               ? 'bg-[#0D5FF9] text-white'
               : 'text-neutral-500 hover:bg-neutral-100'
-          }`}
+            }`}
         >
           <MessageSquarePlus className="w-3.5 h-3.5" />
         </button>
@@ -1775,11 +1714,10 @@ export function CreareSiteWebPage({
           type="button"
           onClick={() => setStudioMode((prev) => !prev)}
           aria-label="Comută Mod Studio din bară"
-          className={`px-2.5 h-8 rounded-full flex items-center gap-1 text-[11px] font-semibold transition-colors cursor-pointer ${
-            studioMode
+          className={`px-2.5 h-8 rounded-full flex items-center gap-1 text-[11px] font-semibold transition-colors cursor-pointer ${studioMode
               ? 'bg-violet-100 text-violet-700'
               : 'bg-neutral-100 text-neutral-500'
-          }`}
+            }`}
         >
           <Sparkles className="w-3 h-3" />
           <span>Studio</span>

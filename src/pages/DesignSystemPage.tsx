@@ -30,6 +30,7 @@ import {
   WireframeBrowserCard,
 } from '../components/StudioIcons';
 import { PROCESS_STEPS } from '../components/DarkMethodologySection';
+import { RoGrowthWordmarkFooter } from '../components/ui/wordmark-footer';
 import { ArrowLeft, ArrowRight, Check, Layers } from 'lucide-react';
 
 interface DesignSystemPageProps {
@@ -56,7 +57,7 @@ export function DesignSystemPage({
 
   const handleCopyToken = (id: string, value: string) => {
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(value).catch(() => {});
+      navigator.clipboard.writeText(value).catch(() => { });
     }
     setCopiedTokenId(id);
     setTimeout(() => {
@@ -211,11 +212,10 @@ export function DesignSystemPage({
                     type="button"
                     onClick={() => handleCopyToken(token.id, token.hex)}
                     aria-label={`Copiază codul hex ${token.hex}`}
-                    className={`px-2.5 py-1 rounded-full text-[10px] font-mono-code font-semibold cursor-pointer transition-colors ${
-                      token.textContrastClass === 'text-white'
+                    className={`px-2.5 py-1 rounded-full text-[10px] font-mono-code font-semibold cursor-pointer transition-colors ${token.textContrastClass === 'text-white'
                         ? 'bg-white/15 text-white hover:bg-white/25'
                         : 'bg-neutral-900/10 text-[#141517] hover:bg-neutral-900/20'
-                    }`}
+                      }`}
                   >
                     {copiedTokenId === token.id ? 'Copiat!' : 'Copiază'}
                   </button>
@@ -363,22 +363,20 @@ export function DesignSystemPage({
             <button
               type="button"
               onClick={() => setFramePreviewMode('light')}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
-                framePreviewMode === 'light'
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${framePreviewMode === 'light'
                   ? 'bg-[#141517] text-white'
                   : 'text-neutral-600 hover:text-[#141517]'
-              }`}
+                }`}
             >
               Suprafață Light Studio
             </button>
             <button
               type="button"
               onClick={() => setFramePreviewMode('dark')}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
-                framePreviewMode === 'dark'
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${framePreviewMode === 'dark'
                   ? 'bg-[#0D5FF9] text-white'
                   : 'text-neutral-600 hover:text-[#141517]'
-              }`}
+                }`}
             >
               Suprafață Dark Obsidian
             </button>
@@ -388,11 +386,10 @@ export function DesignSystemPage({
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left: FigmaSelectionFrame + MultiplayerCursors Live Preview */}
           <div
-            className={`lg:col-span-7 rounded-[28px] p-8 md:p-12 border transition-colors flex flex-col items-center justify-center relative min-h-[380px] ${
-              framePreviewMode === 'dark'
+            className={`lg:col-span-7 rounded-[28px] p-8 md:p-12 border transition-colors flex flex-col items-center justify-center relative min-h-[380px] ${framePreviewMode === 'dark'
                 ? 'bg-[#050505] border-neutral-800 text-white'
                 : 'bg-onlines-grid border-neutral-200/90 text-[#141517]'
-            }`}
+              }`}
           >
             <div className="mb-8 flex flex-wrap items-center justify-center gap-4">
               <MultiplayerCursor
@@ -427,20 +424,18 @@ export function DesignSystemPage({
               className="px-8 py-6 text-center"
             >
               <h3
-                className={`text-[clamp(1.85rem,3.5vw,3rem)] font-extrabold tracking-[-0.04em] leading-none ${
-                  framePreviewMode === 'dark' ? 'text-white' : 'text-[#141517]'
-                }`}
+                className={`text-[clamp(1.85rem,3.5vw,3rem)] font-extrabold tracking-[-0.04em] leading-none ${framePreviewMode === 'dark' ? 'text-white' : 'text-[#141517]'
+                  }`}
               >
                 /creare-siteweb
               </h3>
             </FigmaSelectionFrame>
 
             <p
-              className={`mt-10 text-xs font-mono-code ${
-                framePreviewMode === 'dark'
+              className={`mt-10 text-xs font-mono-code ${framePreviewMode === 'dark'
                   ? 'text-neutral-400'
                   : 'text-neutral-500'
-              }`}
+                }`}
             >
               Componentă: &lt;FigmaSelectionFrame mode=&quot;{framePreviewMode}
               &quot; /&gt; + &lt;MultiplayerCursor /&gt;
@@ -551,11 +546,10 @@ export function DesignSystemPage({
                       key={s.step}
                       type="button"
                       onClick={() => setActiveMacStep(idx)}
-                      className={`px-2 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
-                        activeMacStep === idx
+                      className={`px-2 py-1.5 rounded-md text-left transition-colors cursor-pointer ${activeMacStep === idx
                           ? 'bg-white text-[#0D5FF9] font-semibold'
                           : 'bg-white/10 text-white/80 hover:bg-white/20'
-                      }`}
+                        }`}
                     >
                       <span className="block text-[10px] font-mono-code leading-none mb-0.5">
                         {s.step}
@@ -639,19 +633,17 @@ export function DesignSystemPage({
                     key={step.id}
                     type="button"
                     onClick={() => setActiveBlueprintIdx(idx)}
-                    className={`w-full text-left p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-4 ${
-                      isSelected
+                    className={`w-full text-left p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-4 ${isSelected
                         ? 'bg-[#141517] border-[#141517] text-white shadow-md'
                         : 'bg-white border-neutral-200/90 text-[#141517] hover:border-[#0D5FF9]'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
                       <span
-                        className={`text-xs font-mono-code font-bold px-2.5 py-1 rounded-lg ${
-                          isSelected
+                        className={`text-xs font-mono-code font-bold px-2.5 py-1 rounded-lg ${isSelected
                             ? 'bg-[#0D5FF9] text-white'
                             : 'bg-neutral-100 text-neutral-600'
-                        }`}
+                          }`}
                       >
                         {step.stepNumber}
                       </span>
@@ -660,9 +652,8 @@ export function DesignSystemPage({
                       </span>
                     </div>
                     <span
-                      className={`text-[11px] font-mono-code shrink-0 ${
-                        isSelected ? 'text-sky-300' : 'text-neutral-400'
-                      }`}
+                      className={`text-[11px] font-mono-code shrink-0 ${isSelected ? 'text-sky-300' : 'text-neutral-400'
+                        }`}
                     >
                       {step.surface.split(' ')[0]}
                     </span>
@@ -733,35 +724,19 @@ export function DesignSystemPage({
         </div>
       </section>
 
-      {/* Shared Minimalist Monospace Footer */}
-      <footer className="border-t border-neutral-200/80 pt-8 pb-24 px-6 md:px-48 text-center bg-white">
-        <div className="max-w-[1360px] mx-auto flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[10px] md:text-[11px] font-mono-code tracking-wider uppercase text-neutral-400">
-          <span>
-            ©2026 ROGROWTH.RO — SISTEM DE DESIGN & COMPONENTE UI V1.0. BUCUREȘTI, ROMÂNIA.
-          </span>
-          <button
-            type="button"
-            onClick={onNavigateHome}
-            className="underline hover:text-[#141517] transition-colors uppercase cursor-pointer whitespace-nowrap"
-          >
-            ACASĂ (ROGROWTH.RO)
-          </button>
-          <button
-            type="button"
-            onClick={() => onOpenLegalModal('terminos')}
-            className="underline hover:text-[#141517] transition-colors uppercase cursor-pointer whitespace-nowrap"
-          >
-            TERMENI COMERCIALI
-          </button>
-          <button
-            type="button"
-            onClick={() => onOpenLegalModal('privacidad')}
-            className="underline hover:text-[#141517] transition-colors uppercase cursor-pointer whitespace-nowrap"
-          >
-            CONFIDENȚIALITATE
-          </button>
-        </div>
-      </footer>
+      {/* Shared Branded Wordmark Footer */}
+      <RoGrowthWordmarkFooter
+        onOpenLegalModal={onOpenLegalModal}
+        onNavigate={(path) => {
+          if (path === '/') {
+            onNavigateHome();
+          } else if (path === '/design-system') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (typeof window !== 'undefined') {
+            window.location.href = path;
+          }
+        }}
+      />
 
       {/* Floating Bottom-Left Studio Route Switcher */}
       <div

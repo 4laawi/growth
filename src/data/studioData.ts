@@ -94,18 +94,18 @@ export const SERVICE_CARDS: ServiceCardItem[] = [
     priceBadge: '€300 – €400',
     deliveryBadge: '2 – 4 săptămâni',
     cardDescription:
-      'Prezentare de brand curată și profesionistă pentru antreprenori și IMM-uri: explicarea clară a serviciilor, autoritate comercială și generare de apeluri, mesaje WhatsApp și cereri de ofertă.',
+      'Prezentare de brand curată și rapidă pentru antreprenori și IMM-uri, orientată pe credibilitate și contact direct.',
     bottomCaption:
       'Buget estimat: €300 – €400 · Livrare în 2 – 4 săptămâni · Ideal pentru start-up-uri și afaceri care au nevoie rapid de o amprentă digitală profesionistă.',
     variant: 'cobalt',
     hasCta: true,
     ctaLabel: 'Alege pachetul Prezentare →',
     deliverables: [
-      '~5 pagini cu design responsive mobile-first (testat pe iOS Safari & Android Chrome)',
-      'Viteză de încărcare ultra-rapidă și arhitectură SEO de bază din Ziua 1',
-      'Configurare completă Google Search Console & Google Business Profile',
-      'Landing page-uri dedicate pentru campanii Google Ads sau Meta Ads',
-      '2 runde majore de revizii incluse + 100% proprietatea clientului asupra codului',
+      '~5 pagini optimizate mobile-first',
+      'Viteză ultra-rapidă & SEO tehnic din Ziua 1',
+      'Google Search Console & Google Business Profile',
+      'Landing page-uri dedicate pentru campanii Ads',
+      '2 runde majore de revizii + 100% proprietatea codului',
     ],
     timeline: '2 – 4 săptămâni · €300 – €400 (30% avans / 70% la finalizare)',
   },
@@ -116,18 +116,18 @@ export const SERVICE_CARDS: ServiceCardItem[] = [
     priceBadge: '€700 – €1.200',
     deliveryBadge: '3 – 5 săptămâni',
     cardDescription:
-      'Structurat strategic în jurul pâlniilor de conversie: îndemnuri la acțiune (CTA) clare, formulare fără fricțiune, programări online, filtre de catalog și vizibilitate organică în Google.',
+      'Structurat strategic pentru conversie: generare de lead-uri, programări online și vizibilitate organică în Google.',
     bottomCaption:
       'Buget estimat: €700 – €1.200 · Livrare în 3 – 5 săptămâni · Include sisteme de programări (clinici, saloane, închirieri auto) sau redesign tehnic complet.',
     variant: 'cobalt-deep',
     hasCta: true,
     ctaLabel: 'Alege pachetul Conversie →',
     deliverables: [
-      'Design UI/UX personalizat și layout-uri adaptate parcursului vizitatorului',
-      'SEO on-page aprofundat, mapare semantică a cuvintelor cheie și structură de conținut',
-      'Pâlnii de captare lead-uri sau fluxuri interactive de programări online (sloturi orare)',
-      'Configurare multilingvă opțională (RO / EN) și monitorizare conversii',
-      'Redesign & salvare tehnică pentru site-uri învechite sau lente',
+      'Design UI/UX personalizat & pagini dedicate de servicii',
+      'Formulare interactive de captare sau programări online',
+      'SEO on-page aprofundat & monitorizare conversii',
+      'Configurare multilingvă opțională (RO / EN)',
+      'Optimizare Core Web Vitals & viteză mobilă',
     ],
     timeline: '3 – 5 săptămâni · €700 – €1.200 (30% avans / 70% la finalizare)',
   },
@@ -138,17 +138,17 @@ export const SERVICE_CARDS: ServiceCardItem[] = [
     priceBadge: '€1.000 – €2.300+',
     deliveryBadge: '5 – 8 săptămâni',
     cardDescription:
-      'Magazine e-commerce, panouri de administrare custom (Next.js & Supabase) și servicii de agenție full-service pe termen lung: SEO tehnic, Google & Meta Ads, automatizări și print.',
+      'Comerț online, portaluri clienți și sisteme web custom, cu integrare completă de plăți și curierat.',
     bottomCaption:
       'Buget e-commerce / aplicații: €1.000 – €2.300+ · Livrare în 5 – 8 săptămâni. Fără vendor lock-in: găzduire proprie sau administrată de RoGrowth.',
     variant: 'periwinkle',
     hasCta: true,
     ctaLabel: 'Vezi pachete E-Commerce →',
     deliverables: [
-      'Magazin online (stack custom Next.js, WooCommerce sau Shopify în funcție de catalog)',
-      'Procesatoare de plăți (Netopia, Stripe) și API-uri curierat automatizate (Fan Courier, Sameday)',
-      'Aplicații web, portaluri clienți, autentificare și baze de date PostgreSQL / Supabase',
-      'Creștere continuă: audituri SEO, Google & Meta Ads, automatizări Zapier/Make & identitate/print',
+      'Magazin online complet (Next.js, WooCommerce, Shopify)',
+      'Plăți securizate cu cardul & AWB automatizat',
+      'Portaluri clienți, autentificare & baze de date PostgreSQL',
+      'Creștere continuă: SEO tehnic, campanii Ads și automatizări',
     ],
     timeline: '5 – 8 săptămâni · €1.000 – €2.300+ (plată etapizată 30% / 40% / 30%)',
   },
@@ -322,7 +322,7 @@ export const HIRING_NOTIFICATIONS: HiringNotification[] = [
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
   {
     id: 'kasata-imobiliare',
-    title: 'Kasata Imobiliare — Platformă & Căutare Proprietăți',
+    title: 'Kasata Imobiliare — Portal & Filtrare',
     client: 'Kasata Imobiliare (București & Ilfov)',
     category: 'experiencia',
     categoryLabel: 'Lead-Gen & Imobiliare · €700 – €1.200',
@@ -333,14 +333,14 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     stepOffsetPx: 45,
     cardHeightPx: 400,
     summary:
-      'Platformă imobiliară modernă construită pentru vânzări și închirieri în București și Ilfov: motor rapid de filtrare după tip proprietate, zonă, construcții noi și comision 0%, fișe clare de proprietate cu preț și suprafață și contact direct pe WhatsApp și telefon.',
+      'Platformă imobiliară cu filtrare rapidă după zonă și preț, comision 0% și captare directă de cereri pe WhatsApp.',
     impactMetric: 'Filtrare instantanee proprietăți + captare lead-uri WhatsApp & apel direct',
-    stack: ['Next.js', 'Tailwind CSS', 'Motor Filtrare Proprietăți', 'SEO Local București & Ilfov'],
+    stack: ['Next.js', 'Tailwind CSS', 'Filtrare Rapidă'],
     liveUrl: '#contacto',
   },
   {
     id: 'dental-crown-health',
-    title: 'Dental Crown Health — Clinică & Programări',
+    title: 'Dental Crown Health — Clinică Stomatologică',
     client: 'Dental Crown Health (Servicii Stomatologice & CEREC)',
     category: 'gobierno',
     categoryLabel: 'Clinică Medicală & Prezentare · €400 – €900',
@@ -351,14 +351,14 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     stepOffsetPx: 120,
     cardHeightPx: 330,
     summary:
-      'Site web de autoritate medicală pentru clinică stomatologică: structurarea clară a serviciilor (CEREC, Radiologie, Cazurile Noastre, Tarife, Echipă), CTA permanent „Programează-te” în bară și optimizare mobilă pentru pacienții care caută urgențe sau tratamente dentare.',
+      'Website de autoritate medicală cu structură clară a tratamentelor, listă transparentă de tarife și programare rapidă.',
     impactMetric: 'Structură clară de tarife & programări online + indexare Google Business Profile',
-    stack: ['Design Medical Mobile-First', 'Flux Programări Pacienți', 'Core SEO', 'Google Search Console'],
+    stack: ['Design Mobile-First', 'Programări Online'],
     liveUrl: '#contacto',
   },
   {
     id: 'baristas-coffee',
-    title: 'Baristas Coffee Shop — Magazin Online Cafea & Aparate',
+    title: 'Baristas Coffee Shop — Magazin Online',
     client: 'Baristas Coffee Shop (Comerț Online România)',
     category: 'producto',
     categoryLabel: 'Magazin Online E-Commerce · €1.000 – €2.300+',
@@ -369,14 +369,14 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     stepOffsetPx: 90,
     cardHeightPx: 370,
     summary:
-      'Magazin online dedicat pasionaților de cafea boabe, cafea măcinată și espressoare: căutare rapidă în catalog, cont client, coș de cumpărături fără fricțiune, integrare plăți cu cardul și generare automată AWB pentru livrare rapidă în toată țara.',
+      'Magazin online rapid cu catalog clar de cafea și espressoare, plăți securizate cu cardul și generare automată de AWB-uri.',
     impactMetric: 'Arhitectură E-Commerce completă · Plăți Netopia/Stripe & Curieri Automatizați',
-    stack: ['E-Commerce Custom / WooCommerce', 'Netopia & Stripe', 'Fan Courier & Sameday API', 'SEO Produse'],
+    stack: ['E-Commerce', 'Plăți Card & AWB'],
     liveUrl: '#contacto',
   },
   {
     id: 'rentdacia-bucuresti',
-    title: 'RentDacia — Închirieri Auto București & Otopeni',
+    title: 'RentDacia — Închirieri Auto Otopeni',
     client: 'RentDacia (Închirieri Auto RO / EN)',
     category: 'experiencia',
     categoryLabel: 'Rezervări Auto & Multilingv · €700 – €1.200',
@@ -387,14 +387,14 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     stepOffsetPx: 60,
     cardHeightPx: 410,
     summary:
-      'Platformă rapidă de închirieri auto pentru București și Aeroportul Otopeni: prezentare flotă (Renault Clio Hybrid, gama Dacia), comutator bilingv RO/EN pentru turiști și diaspora, apel rapid „Sună acum” și preluare instantanee a cererilor pe WhatsApp.',
+      'Platformă bilingvă (RO/EN) de închirieri auto optimizată pentru Aeroportul Otopeni, cu apel rapid și preluare pe WhatsApp.',
     impactMetric: 'Arhitectură bilingvă RO/EN + conversie directă pe mobil pentru Aeroportul Otopeni',
-    stack: ['Multilingv RO / EN', 'Prezentare Flotă Auto', 'Conversie WhatsApp & Apel', '100/100 CWV'],
+    stack: ['Bilingv RO / EN', 'Rezervări Rapide'],
     liveUrl: '#contacto',
   },
   {
     id: 'agrumea-farm',
-    title: 'Agrumèa Farm — Brand Artizanal & Catalog Digital',
+    title: 'Agrumèa Farm — Brand Artizanal',
     client: 'Agrumèa Farm (Catalog Gourmet IT / EN)',
     category: 'identidad',
     categoryLabel: 'Design Editorial & Brand · €700 – €1.500',
@@ -404,26 +404,26 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     stepOffsetPx: 30,
     cardHeightPx: 455,
     summary:
-      'Experiență digitală cu direcție artistică ridicată pentru un producător artizanal: tipografie editorială, prezentare de produs la nivel de galerie, interacțiuni fluide și comutator multilingv (IT / EN) fără compromis la viteza de încărcare.',
+      'Experiență digitală editorială pentru un brand artizanal gourmet, cu catalog bilingv și navigare fluidă.',
     impactMetric: 'Direcție vizuală premium + prezentare interactivă de produs fără șabloane',
-    stack: ['UI/UX Editorial', 'Animații Fluide GPU', 'Catalog Multilingv', 'Optimizare Imagini WebP'],
+    stack: ['Design Editorial', 'Catalog Bilingv'],
     liveUrl: '#contacto',
   },
   {
     id: 'dubai-rent-luxury',
-    title: 'Dubai Rent — Închirieri Auto de Lux & Landing Page',
+    title: 'Dubai Rent — Flotă Auto de Lux',
     client: 'Dubai Rent (Luxury Fleet Showcase)',
     category: 'gobierno',
-    categoryLabel: 'Landing Page & Prezentare Flotă · €300 – €700',
+    categoryLabel: 'Landing Page & Flotă de Lux · €300 – €700',
     priceTier: '€300 – €700',
     year: 'Livrare 2 – 4 săpt.',
     image: '/assets/aistudio/prject_a99b37d9.webp',
     stepOffsetPx: 0,
     cardHeightPx: 505,
     summary:
-      'Landing page cu impact vizual puternic pentru rezervări auto sport și de lux: ierarhie tipografică îndrăzneață, navigare rapidă pe colecții și mărci și pâlnie scurtă de contact pentru rezervări rapide.',
+      'Landing page cu impact vizual puternic pentru închirieri auto sport și de lux, cu încărcare instantanee pe mobil.',
     impactMetric: 'Landing page de mare viteză pregătit pentru campanii Google Ads & Meta Ads',
-    stack: ['Landing Page Conversie', 'Next.js & Tailwind CSS', 'Optimizare Google Ads', 'Mobile-First'],
+    stack: ['Landing Page', 'Next.js & Tailwind'],
     liveUrl: '#contacto',
   },
 ];
@@ -739,7 +739,7 @@ export function computeTeamSectionScrollState(
   trackTop: number,
   trackHeight: number,
   viewportHeight: number,
-  isDarkMode: boolean
+  isDarkMode = false
 ): TeamSectionScrollState {
   if (viewportHeight <= 0) {
     return {
@@ -750,10 +750,10 @@ export function computeTeamSectionScrollState(
     };
   }
 
-  const unlockTop = viewportHeight * 0.24;
+  // Smooth entry threshold as the section scrolls into view
+  const unlockTop = viewportHeight * 0.75;
 
-  // Never show while Dark Mode is active or before the dark section has finished exiting
-  if (isDarkMode || trackTop > unlockTop) {
+  if (trackTop > unlockTop) {
     return {
       isRevealed: false,
       revealTarget: 0,
