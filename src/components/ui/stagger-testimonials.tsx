@@ -238,8 +238,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         }
       }}
       className={`absolute left-1/2 top-1/2 cursor-pointer border-2 p-7 sm:p-8 select-none will-change-transform ${isCenter
-          ? 'z-10 bg-[#0D5FF9] text-white border-[#0D5FF9]'
-          : 'z-0 bg-white dark:bg-[#131417] text-[#141517] dark:text-white border-neutral-200 dark:border-white/10 hover:border-[#0D5FF9]/50'
+        ? 'z-10 bg-[#0D5FF9] text-white border-[#0D5FF9]'
+        : 'z-0 bg-white dark:bg-[#131417] text-[#141517] dark:text-white border-neutral-200 dark:border-white/10 hover:border-[#0D5FF9]/50'
         }`}
       style={{
         width: cardSize,
@@ -489,8 +489,8 @@ export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
           type="button"
           onClick={() => handleMove(1, true)}
           className={`flex h-14 w-14 items-center justify-center text-2xl transition-all duration-500 cursor-pointer shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0D5FF9] focus-visible:ring-offset-2 ${isNextHighlighted
-              ? 'bg-[#0D5FF9] text-white border-2 border-[#0D5FF9] scale-105 shadow-lg ring-4 ring-[#0D5FF9]/25'
-              : 'bg-white dark:bg-[#131417] text-[#141517] dark:text-white border-2 border-neutral-200 dark:border-white/15 hover:bg-[#0D5FF9] hover:text-white hover:border-[#0D5FF9]'
+            ? 'bg-[#0D5FF9] text-white border-2 border-[#0D5FF9] scale-105 shadow-lg ring-4 ring-[#0D5FF9]/25'
+            : 'bg-white dark:bg-[#131417] text-[#141517] dark:text-white border-2 border-neutral-200 dark:border-white/15 hover:bg-[#0D5FF9] hover:text-white hover:border-[#0D5FF9]'
             }`}
           aria-label="Impresia următoare"
         >
