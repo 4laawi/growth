@@ -125,5 +125,5 @@ Every dedicated service ("money") page follows this clean architectural sequence
 
 ## 5. Shared AppShell & Routing Contract (`/src/App.tsx`)
 
-- All routes share the **Sticky 3-Zone Top Bar** (`rogrowth.ro` morphing to `'_` on scroll, 5 single-line navigation links, and 1 `"Cere o ofertă"` pill button) and the global modals (`ContactModal`, `ServiceDetailModal`, `ProjectCaseModal`, `ArticleReaderModal`, `CareersModal`).
+- All routes share the **Sticky 3-Zone Top Bar** (`rogrowth.ro` morphing to `'_` on scroll, 5 single-line navigation links, and 1 `"Cere o ofertă"` pill button) and the global modals (`ContactModal`, `ServiceDetailModal`, `ProjectCaseModal`, `CareersModal`).
 - To add a new route (e.g., `/magazin-online`), add it to `AppRoute` and `resolveAppRoute()` in `/src/design-system/tokens.ts`, create the page component in `/src/pages/`, and render it inside `<main>` in `/src/App.tsx`.

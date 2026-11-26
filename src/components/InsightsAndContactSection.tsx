@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-  BLOG_ARTICLES,
-  BlogArticle,
-  validateContactInquiry,
-  computeStaggerDelayMs,
-} from '../data/studioData';
+import { validateContactInquiry } from '../data/studioData';
 import {
   ToolSquircle,
   WireframeBrowserCard,
@@ -16,105 +11,12 @@ import { Instagram, Linkedin, CheckCircle2, ArrowRight } from 'lucide-react';
 const EASE_OUT_EXPO = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
 interface InsightsAndContactSectionProps {
-  onSelectArticle: (article: BlogArticle) => void;
   onOpenContact: (presetService?: string) => void;
   onOpenLegalModal: (type: 'terminos' | 'privacidad') => void;
   onNavigateDesignSystem?: () => void;
 }
 
-function EditorialGuideCover({ theme }: { theme: BlogArticle['visualTheme'] }) {
-  if (theme === 'seo-growth') {
-    return (
-      <div className="w-full h-full bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0D5FF9] p-6 flex flex-col justify-between text-white relative overflow-hidden">
-        <div className="flex items-center justify-between text-[10px] font-mono-code text-sky-200/90">
-          <span>GOOGLE SEARCH CONSOLE</span>
-          <span>ZIUA 1 → ZIUA 90</span>
-        </div>
-        <div className="my-auto py-2">
-          <svg viewBox="0 0 240 90" className="w-full h-24 overflow-visible" fill="none">
-            <path
-              d="M0 80 Q 45 72, 85 52 T 165 28 T 240 8"
-              stroke="#38BDF8"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-            <path
-              d="M0 84 Q 55 78, 95 62 T 175 40 T 240 20"
-              stroke="#A5B4FC"
-              strokeWidth="2"
-              strokeDasharray="4 4"
-            />
-          </svg>
-        </div>
-        <div className="flex items-center justify-between text-xs font-semibold border-t border-white/15 pt-3">
-          <span>Indexare & Autoritate Domeniu</span>
-          <span className="font-mono-code text-sky-300">+Organic</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (theme === 'pricing-clarity') {
-    return (
-      <div className="w-full h-full bg-gradient-to-br from-[#054CE6] via-[#0D5FF9] to-[#1D4ED8] p-6 flex flex-col justify-between text-white">
-        <div className="flex items-center justify-between text-[10px] font-mono-code text-white/80">
-          <span>TRANSPARENȚĂ COMERCIALĂ</span>
-          <span>ROGROWTH.RO</span>
-        </div>
-        <div className="space-y-2 my-auto">
-          <div className="rounded-xl bg-white/10 px-3.5 py-2 flex items-center justify-between text-xs">
-            <span>01. Site Prezentare</span>
-            <span className="font-extrabold tabular-nums">€300 – €400</span>
-          </div>
-          <div className="rounded-xl bg-white/20 px-3.5 py-2 flex items-center justify-between text-xs">
-            <span>02. Site Conversie / Programări</span>
-            <span className="font-extrabold tabular-nums">€700 – €1.200</span>
-          </div>
-          <div className="rounded-xl bg-white/10 px-3.5 py-2 flex items-center justify-between text-xs">
-            <span>03. E-Commerce & Web Apps</span>
-            <span className="font-extrabold tabular-nums">€1.000 – €2.300+</span>
-          </div>
-        </div>
-        <div className="text-[11px] font-mono-code text-sky-200 border-t border-white/15 pt-3">
-          30% avans / 70% la predare · 2 runde revizii
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="w-full h-full bg-gradient-to-br from-[#141517] via-[#1E2028] to-[#111827] p-6 flex flex-col justify-between text-white">
-      <div className="flex items-center justify-between text-[10px] font-mono-code text-emerald-400">
-        <span>ZERO VENDOR LOCK-IN</span>
-        <span>100% CODUL TĂU</span>
-      </div>
-      <div className="grid grid-cols-2 gap-2.5 my-auto">
-        <div className="rounded-xl bg-white/[0.06] border border-white/10 p-3 text-center">
-          <span className="block text-2xl font-extrabold text-emerald-400 tabular-nums">
-            100/100
-          </span>
-          <span className="text-[10px] font-mono-code text-neutral-300">
-            Core Web Vitals
-          </span>
-        </div>
-        <div className="rounded-xl bg-white/[0.06] border border-white/10 p-3 text-center">
-          <span className="block text-2xl font-extrabold text-sky-400 tabular-nums">
-            100%
-          </span>
-          <span className="text-[10px] font-mono-code text-neutral-300">
-            Proprietate Client
-          </span>
-        </div>
-      </div>
-      <div className="text-[11px] font-mono-code text-neutral-400 border-t border-white/10 pt-3">
-        Next.js · TypeScript · Tailwind · Supabase
-      </div>
-    </div>
-  );
-}
-
 export function InsightsAndContactSection({
-  onSelectArticle,
   onOpenContact,
   onOpenLegalModal,
   onNavigateDesignSystem,
@@ -129,7 +31,6 @@ export function InsightsAndContactSection({
   const [inlineErrors, setInlineErrors] = useState<Record<string, string>>({});
   const [inlineSubmitted, setInlineSubmitted] = useState(false);
 
-  const insightsReveal = useSectionReveal<HTMLElement>();
   const contactReveal = useSectionReveal<HTMLElement>();
 
   const handleInlineSubmit = (e: React.FormEvent) => {
@@ -151,90 +52,13 @@ export function InsightsAndContactSection({
 
   return (
     <div className="bg-transparent">
-      {/* Part 1: 3-Column SEO & Commercial Transparency Guides */}
-      <section
-        ref={insightsReveal.ref}
-        id="insights"
-        data-section-revealed={insightsReveal.isRevealed ? 'true' : 'false'}
-        aria-labelledby="insights-heading"
-        className="py-20 md:py-24 px-6 md:px-12 lg:px-16 max-w-[1280px] mx-auto border-t border-neutral-100"
-      >
-        <div
-          style={{
-            opacity: insightsReveal.isRevealed ? 1 : 0,
-            transform: insightsReveal.isRevealed
-              ? 'translate3d(0, 0, 0)'
-              : 'translate3d(0, 18px, 0)',
-            transition: `opacity 600ms ${EASE_OUT_EXPO}, transform 600ms ${EASE_OUT_EXPO}`,
-          }}
-          className="mb-10"
-        >
-          <p className="text-xs font-mono-code uppercase tracking-widest text-[#0D5FF9] mb-2">
-            Ghiduri pentru Antreprenori · Claritate Tehnică & Comercială
-          </p>
-          <h2
-            id="insights-heading"
-            className="text-[clamp(1.85rem,3.4vw,2.75rem)] font-extrabold tracking-[-0.03em] text-[#141517]"
-          >
-            Cum gândim site-urile care aduc clienți pe termen lung
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-9">
-          {BLOG_ARTICLES.map((article, idx) => {
-            const delayMs = computeStaggerDelayMs(idx, 90, 240);
-            return (
-              <article
-                key={article.id}
-                onClick={() => onSelectArticle(article)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    onSelectArticle(article);
-                  }
-                }}
-                aria-label={`Citește ghidul: ${article.title}`}
-                style={{
-                  opacity: insightsReveal.isRevealed ? 1 : 0,
-                  transform: insightsReveal.isRevealed
-                    ? 'translate3d(0, 0, 0)'
-                    : 'translate3d(0, 22px, 0)',
-                  transition: `opacity 620ms ${EASE_OUT_EXPO} ${delayMs}ms, transform 620ms ${EASE_OUT_EXPO} ${delayMs}ms`,
-                }}
-                className="group flex flex-col text-left cursor-pointer"
-              >
-                <div className="w-full aspect-[16/11] rounded-[24px] overflow-hidden bg-neutral-100 mb-5 shadow-[0_12px_35px_rgba(0,0,0,0.06)] transition-transform duration-300 group-hover:-translate-y-1">
-                  <EditorialGuideCover theme={article.visualTheme} />
-                </div>
-
-                <div className="flex items-center gap-2 text-xs text-neutral-500 mb-2">
-                  <span>{article.category}</span>
-                  <span aria-hidden="true">·</span>
-                  <span>{article.readTime}</span>
-                </div>
-
-                <h3 className="text-[19px] lg:text-[21px] font-bold text-[#141517] group-hover:text-[#0D5FF9] tracking-[-0.02em] leading-[1.28] mb-2.5 transition-colors">
-                  {article.title}
-                </h3>
-
-                <p className="text-[13.5px] text-neutral-500 leading-[1.6]">
-                  {article.excerpt}
-                </p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Part 2: "Construim site-ul afacerii tale?" Collage + Inline High-Conversion Form */}
+      {/* Part 1: "Construim site-ul afacerii tale?" Collage + Inline High-Conversion Form */}
       <section
         ref={contactReveal.ref}
         id="contacto"
         data-section-revealed={contactReveal.isRevealed ? 'true' : 'false'}
         aria-labelledby="hagamos-heading"
-        className="pt-12 pb-24 px-6 md:px-12 lg:px-16 max-w-[1340px] mx-auto"
+        className="pt-20 md:pt-24 pb-24 px-6 md:px-12 lg:px-16 max-w-[1340px] mx-auto border-t border-neutral-100"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           {/* Left Column: Interactive Studio Collage with Real Projects & Search Console Chart */}
@@ -577,7 +401,7 @@ export function InsightsAndContactSection({
         </div>
       </section>
 
-      {/* Part 3: Branded Wordmark Footer */}
+      {/* Part 2: Branded Wordmark Footer */}
       <RoGrowthWordmarkFooter
         onOpenLegalModal={onOpenLegalModal}
         onNavigate={(path) => {

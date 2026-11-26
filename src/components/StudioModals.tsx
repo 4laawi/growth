@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  BlogArticle,
   HIRING_NOTIFICATIONS,
   HiringNotification,
   PortfolioProject,
@@ -697,66 +696,6 @@ export function ServiceDetailModal({
           >
             Solicită ofertă pentru acest pachet
           </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export function ArticleReaderModal({
-  article,
-  onClose,
-}: {
-  article: BlogArticle | null;
-  onClose: () => void;
-}) {
-  if (!article) return null;
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="article-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-    >
-      <div className="relative w-full max-w-2xl rounded-[28px] bg-white p-7 md:p-10 shadow-2xl border border-neutral-200 max-h-[90vh] overflow-y-auto">
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Închide articolul"
-          className="absolute top-6 right-6 w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center text-[#141517] cursor-pointer"
-        >
-          <X className="w-4 h-4" />
-        </button>
-
-        <div className="flex items-center gap-2 text-xs text-neutral-400 mb-3">
-          <span>{article.category}</span>
-          <span>·</span>
-          <span>{article.publishedAt}</span>
-          <span>·</span>
-          <span>{article.readTime}</span>
-        </div>
-
-        <h2
-          id="article-modal-title"
-          className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#141517] leading-tight mb-6"
-        >
-          {article.title}
-        </h2>
-
-        <div className="w-full h-56 rounded-2xl overflow-hidden mb-6 bg-neutral-100">
-          <img
-            src={article.image}
-            alt={article.title}
-            referrerPolicy="no-referrer"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        <div className="space-y-4 text-sm md:text-base text-neutral-700 leading-relaxed">
-          {article.content.map((p, idx) => (
-            <p key={idx}>{p}</p>
-          ))}
         </div>
       </div>
     </div>

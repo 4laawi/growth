@@ -5,7 +5,6 @@
  */
 import React, { useState, useEffect } from 'react';
 import {
-  BlogArticle,
   HiringNotification,
   PORTFOLIO_PROJECTS,
   PortfolioProject,
@@ -24,7 +23,6 @@ import { FigmaFramerShowcaseSection } from './components/ui/figma-framer-showcas
 import { DesignSystemPage } from './pages/DesignSystemPage';
 import { CreareSiteWebPage } from './pages/CreareSiteWebPage';
 import {
-  ArticleReaderModal,
   CareersModal,
   ContactModal,
   ProjectCaseModal,
@@ -53,9 +51,6 @@ export default function App() {
     null
   );
   const [selectedService, setSelectedService] = useState<ServiceCardItem | null>(
-    null
-  );
-  const [selectedArticle, setSelectedArticle] = useState<BlogArticle | null>(
     null
   );
   const [legalModalType, setLegalModalType] = useState<
@@ -317,9 +312,8 @@ export default function App() {
             {/* 5B. What People Say / Impressions Section (Stagger Testimonials) */}
             <StaggerTestimonialsSection />
 
-            {/* 6. SEO Guides, "Construim site-ul afacerii tale?" Collage & Bucharest/National Footer */}
+            {/* 6. "Construim site-ul afacerii tale?" Collage & Bucharest/National Footer */}
             <InsightsAndContactSection
-              onSelectArticle={(article) => setSelectedArticle(article)}
               onOpenContact={() => handleOpenContact()}
               onOpenLegalModal={(type) => setLegalModalType(type)}
               onNavigateDesignSystem={() => navigateToRoute('/design-system')}
@@ -355,11 +349,6 @@ export default function App() {
         service={selectedService}
         onClose={() => setSelectedService(null)}
         onOpenContact={handleOpenContact}
-      />
-
-      <ArticleReaderModal
-        article={selectedArticle}
-        onClose={() => setSelectedArticle(null)}
       />
 
       {legalModalType && (
