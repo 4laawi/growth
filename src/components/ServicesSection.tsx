@@ -339,25 +339,6 @@ export function ServicesSection({ onOpenServiceModal }: ServicesSectionProps) {
               ))}
             </p>
           </div>
-
-          {/* Modest Bottom Scroll Progress & Anchor Cue */}
-          <div className="absolute bottom-10 inset-x-0 flex flex-col items-center gap-3 z-10">
-            <div
-              aria-hidden="true"
-              className="w-28 h-[2px] bg-neutral-100 rounded-full overflow-hidden"
-            >
-              <div
-                ref={progressBarRef}
-                className="h-full w-full bg-[#0D5FF9] origin-left will-change-transform"
-                style={{ transform: 'scaleX(0)' }}
-              />
-            </div>
-            <p className="text-[11.5px] font-mono-code text-neutral-400 whitespace-nowrap">
-              {isComplete
-                ? 'Continuă să derulezi ↓'
-                : 'Derulează pentru a descoperi ↓'}
-            </p>
-          </div>
         </div>
       </div>
     </section>
@@ -372,8 +353,22 @@ export function PricingTablesSection({
       id="pachete-preturi"
       data-theme-section="true"
       aria-labelledby="pricing-heading"
-      className="bg-transparent py-20 lg:py-24 transition-colors duration-500 ease-out"
+      className="bg-transparent pt-8 pb-20 lg:pt-10 lg:pb-24 transition-colors duration-500 ease-out"
     >
+      {/* Centered Pricing Anchor Cue Near Pricing Table */}
+      <div className="flex flex-col items-center gap-3 mb-14 lg:mb-16">
+        <div
+          aria-hidden="true"
+          className="w-28 h-[2px] bg-[#0D5FF9] rounded-full"
+        />
+        <a
+          href="#pachete-preturi-cards"
+          className="text-[11.5px] font-mono-code text-neutral-400 hover:text-[#141517] transition-colors whitespace-nowrap"
+        >
+          Pachete &amp; prețuri mai jos ↓
+        </a>
+      </div>
+
       <div className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20">
         <div className="mb-12">
           <p className="text-xs font-mono-code uppercase tracking-widest text-[#0D5FF9] mb-2">
@@ -387,7 +382,10 @@ export function PricingTablesSection({
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7 items-stretch">
+        <div
+          id="pachete-preturi-cards"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7 items-stretch scroll-mt-24"
+        >
           {SERVICE_CARDS.map((card) => (
             <PricingTierCard
               key={card.id}
