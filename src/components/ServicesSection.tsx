@@ -374,12 +374,21 @@ export function ServicesSection({ onOpenServiceModal }: ServicesSectionProps) {
           </div>
         </div>
       </div>
+    </section>
+  );
+}
 
-      {/* 3 Signature Cobalt Pricing & Deliverable Cards */}
-      <div
-        id="pachete-preturi"
-        className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 pt-8 pb-28"
-      >
+export function PricingTablesSection({
+  onOpenServiceModal,
+}: ServicesSectionProps) {
+  return (
+    <section
+      id="pachete-preturi"
+      data-theme-section="true"
+      aria-label="Pachete și prețuri"
+      className="bg-transparent py-20 lg:py-24 transition-colors duration-500 ease-out"
+    >
+      <div className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7 items-stretch">
           {SERVICE_CARDS.map((card) => (
             <PricingTierCard

@@ -149,26 +149,21 @@ export function DarkMethodologySection({
                     key={item.step}
                     type="button"
                     onClick={() => handleStepSelect(idx)}
-                    className={`w-full text-left p-3.5 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-between gap-4 ${isActive
+                    className={`w-full text-left p-3.5 rounded-xl border transition-all duration-200 cursor-pointer flex items-center gap-3 ${isActive
                         ? 'bg-white border-[#0D5FF9] text-[#141517] shadow-sm'
                         : 'bg-white/60 border-neutral-200/80 text-neutral-700 hover:bg-white hover:border-neutral-300'
                       }`}
                   >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span
-                        className={`text-xs font-mono-code font-bold px-2 py-1 rounded ${isActive
-                            ? 'bg-[#0D5FF9] text-white'
-                            : 'bg-neutral-100 text-neutral-600'
-                          }`}
-                      >
-                        {item.step}
-                      </span>
-                      <span className="text-sm font-bold truncate">
-                        {item.title}
-                      </span>
-                    </div>
-                    <span className="hidden sm:inline-block text-[11px] font-mono-code shrink-0 text-neutral-500">
-                      {item.deliverable}
+                    <span
+                      className={`text-xs font-mono-code font-bold px-2 py-1 rounded shrink-0 ${isActive
+                          ? 'bg-[#0D5FF9] text-white'
+                          : 'bg-neutral-100 text-neutral-600'
+                        }`}
+                    >
+                      {item.step}
+                    </span>
+                    <span className="text-sm font-bold truncate">
+                      {item.title}
                     </span>
                   </button>
                 );
@@ -228,10 +223,6 @@ export function DarkMethodologySection({
             </MacBookHardwareFrame>
           </div>
         </div>
-
-        <p className="mt-4 text-[12.5px] max-w-xl leading-relaxed text-neutral-500">
-          Prețuri transparente, 2 runde de revizii incluse și proprietate 100% asupra codului.
-        </p>
       </div>
     </section>
   );

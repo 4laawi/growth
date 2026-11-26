@@ -241,10 +241,9 @@ export function PricingTierCard({
         className={`group relative rounded-2xl p-7 md:p-8 min-h-[500px] lg:min-h-[530px] text-white flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 shadow-[0_18px_40px_rgba(13,95,249,0.16)] cursor-pointer flex-1 ${bgStyles}`}
       >
         <div>
-          {/* Top Index + Delivery Timeline */}
-          <div className="flex items-center justify-between text-xs font-mono-code text-white/80 pb-4 mb-5 border-b border-white/15">
+          {/* Top Index */}
+          <div className="flex items-center text-xs font-mono-code text-white/80 pb-4 mb-5 border-b border-white/15">
             <span>{card.number}. PACHET</span>
-            <span>Livrare: {card.deliveryBadge}</span>
           </div>
 
           {/* Prominent Price Display */}

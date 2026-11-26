@@ -53,7 +53,7 @@ export function DetailsAndPortfolioSection({
         >
           <div>
             <p className="text-xs font-mono-code uppercase tracking-widest text-[#0D5FF9] mb-2">
-              Portofoliu Real RoGrowth.ro · Proiecte Construite & Lansate
+              Portofoliu
             </p>
             <h2
               id="portfolio-heading"

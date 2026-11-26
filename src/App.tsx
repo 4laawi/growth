@@ -13,7 +13,7 @@ import {
 } from './data/studioData';
 import { AppRoute, resolveAppRoute } from './design-system/tokens';
 import { HeroCanvas } from './components/HeroCanvas';
-import { ServicesSection } from './components/ServicesSection';
+import { ServicesSection, PricingTablesSection } from './components/ServicesSection';
 import { CrossoverTextSection } from './components/CrossoverTextSection';
 import { DarkMethodologySection } from './components/DarkMethodologySection';
 import { TeamSection } from './components/TeamSection';
@@ -278,7 +278,7 @@ export default function App() {
               onNavigateCreareSite={() => navigateToRoute('/creare-siteweb')}
             />
 
-            {/* 2. Scroll-Illuminated Manifesto + 3 Cobalt Service & Pricing Cards */}
+            {/* 2. Scroll-Illuminated Manifesto */}
             <ServicesSection
               onOpenServiceModal={(service) => setSelectedService(service)}
             />
@@ -307,6 +307,11 @@ export default function App() {
             {/* 5. Real Portfolio Projects & Case Studies Showcase */}
             <DetailsAndPortfolioSection
               onSelectProject={(project) => setSelectedProject(project)}
+            />
+
+            {/* 5A. 3 Cobalt Service & Pricing Tables */}
+            <PricingTablesSection
+              onOpenServiceModal={(service) => setSelectedService(service)}
             />
 
             {/* 5B. What People Say / Impressions Section (Stagger Testimonials) */}
