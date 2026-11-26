@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   PORTFOLIO_PROJECTS,
   PortfolioProject,
+  ROGROWTH_CONTACT,
   ServiceCardItem,
   computeDarkModeScrollState,
   computeManifestoScrollState,
@@ -39,6 +40,7 @@ import {
   MultiplayerCursor,
   OnlinesNotificationBubble,
   ToolSquircle,
+  WhatsAppIcon,
   WireframeBrowserCard,
 } from '../components/StudioIcons';
 import {
@@ -48,8 +50,10 @@ import {
   CheckCircle2,
   Grid,
   Layers,
+  MapPin,
   MessageSquarePlus,
   MousePointer,
+  Phone,
   Sparkles,
 } from 'lucide-react';
 
@@ -1426,6 +1430,13 @@ export function CreareSiteWebPage({
                 compact
                 timeAgo="< 24h"
                 message="Răspuns rapid pe WhatsApp & telefon."
+                onClick={() =>
+                  window.open(
+                    ROGROWTH_CONTACT.whatsappHref,
+                    '_blank',
+                    'noopener,noreferrer'
+                  )
+                }
               />
             </div>
           </div>
@@ -1601,13 +1612,26 @@ export function CreareSiteWebPage({
                 </div>
 
                 <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                  <button
-                    type="submit"
-                    className="px-7 py-3.5 rounded-full bg-[#0D5FF9] hover:bg-[#004AD9] text-white text-sm font-semibold tracking-tight transition-all duration-200 shadow-[0_10px_25px_rgba(13,95,249,0.25)] inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
-                  >
-                    <span>Solicită oferta în scris</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <button
+                      type="submit"
+                      className="px-7 py-3.5 rounded-full bg-[#0D5FF9] hover:bg-[#004AD9] text-white text-sm font-semibold tracking-tight transition-all duration-200 shadow-[0_10px_25px_rgba(13,95,249,0.25)] inline-flex items-center gap-2 cursor-pointer whitespace-nowrap"
+                    >
+                      <span>Solicită oferta în scris</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+
+                    <a
+                      href={ROGROWTH_CONTACT.whatsappHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Scrie pe WhatsApp la ${ROGROWTH_CONTACT.phoneDisplay}`}
+                      className="px-5 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold tracking-tight transition-colors shadow-[0_8px_20px_rgba(5,150,105,0.22)] inline-flex items-center gap-2 whitespace-nowrap"
+                    >
+                      <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
 
                   <span className="text-xs font-mono-code text-neutral-400">
                     30% avans · 100% proprietatea ta
@@ -1615,6 +1639,20 @@ export function CreareSiteWebPage({
                 </div>
               </form>
             )}
+
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1 text-xs text-neutral-500 dark:text-neutral-400">
+              <a
+                href={ROGROWTH_CONTACT.phoneHref}
+                className="inline-flex items-center gap-1.5 font-semibold text-[#141517] dark:text-white hover:text-[#0D5FF9] transition-colors tabular-nums"
+              >
+                <Phone className="w-3.5 h-3.5 text-[#0D5FF9] shrink-0" aria-hidden="true" />
+                <span>{ROGROWTH_CONTACT.phoneDisplay}</span>
+              </a>
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-neutral-400 shrink-0" aria-hidden="true" />
+                <span>{ROGROWTH_CONTACT.addressFull}</span>
+              </span>
+            </div>
           </div>
         </div>
       </section>

@@ -1,9 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { Plus } from "lucide-react"
+import { MapPin, Phone, Plus } from "lucide-react"
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { ROGROWTH_CONTACT } from "../../data/studioData"
+import { WhatsAppIcon } from "../StudioIcons"
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -34,7 +36,11 @@ export interface WordmarkFooterProps extends React.HTMLAttributes<HTMLElement> {
   legalName?: string
   year: number
   description?: string
+  address?: string
   email?: string
+  phone?: string
+  phoneHref?: string
+  whatsappHref?: string
   /** A short status line next to a green dot, such as "All systems normal". */
   status?: string
   /** What screen readers call the footer navigation. */
@@ -54,7 +60,11 @@ export function WordmarkFooter({
   legalName,
   year,
   description,
+  address,
   email,
+  phone,
+  phoneHref,
+  whatsappHref,
   status,
   navLabel = "Footer",
   columns,
@@ -63,6 +73,7 @@ export function WordmarkFooter({
   ...props
 }: WordmarkFooterProps) {
   const displayWordmark = wordmark ?? name
+  const resolvedPhoneHref = phoneHref || (phone ? `tel:${phone.replace(/\s+/g, "")}` : undefined)
 
   return (
     <footer className={cn("relative overflow-hidden bg-background text-foreground transition-colors duration-500 ease-out", className)} {...props}>
@@ -80,6 +91,40 @@ export function WordmarkFooter({
               <p className="mt-4 max-w-[280px] text-[13px] md:text-[14px] leading-relaxed text-muted-foreground font-normal">
                 {description}
               </p>
+            )}
+            {address && (
+              <address className="mt-3 flex max-w-[300px] items-start gap-2 not-italic text-[13px] leading-relaxed text-muted-foreground">
+                <MapPin className="mt-0.5 size-3.5 shrink-0 text-muted-foreground/75" aria-hidden="true" />
+                <span>{address}</span>
+              </address>
+            )}
+            {(phone || whatsappHref) && (
+              <div className="mt-4 flex flex-wrap items-center gap-2.5">
+                {whatsappHref && (
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={phone ? `WhatsApp RoGrowth (${phone})` : "WhatsApp RoGrowth"}
+                    className="inline-flex min-h-10 items-center gap-2 rounded-full bg-emerald-600 px-4 py-2 text-[12.5px] font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700"
+                  >
+                    <WhatsAppIcon className="size-3.5 shrink-0" />
+                    <span>WhatsApp</span>
+                  </a>
+                )}
+                {phone && resolvedPhoneHref && (
+                  <a
+                    href={resolvedPhoneHref}
+                    className={cn(
+                      "inline-flex min-h-10 items-center gap-1.5 rounded-full border border-border/80 px-3.5 py-2 text-[12.5px] font-medium text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground",
+                      tap
+                    )}
+                  >
+                    <Phone className="size-3.5 shrink-0" aria-hidden="true" />
+                    <span className="tabular-nums">{phone}</span>
+                  </a>
+                )}
+              </div>
             )}
             {status && (
               <p className="mt-5 inline-flex items-center gap-2 text-[12px] text-muted-foreground">
@@ -157,6 +202,11 @@ export function WordmarkFooter({
             {email}
           </a>
         )}
+        {phone && resolvedPhoneHref && (
+          <a href={resolvedPhoneHref} className={cn("hover:text-foreground transition-colors font-medium tabular-nums", tap)}>
+            {phone}
+          </a>
+        )}
         {credit && (
           <a
             href={credit.href || "#"}
@@ -198,8 +248,12 @@ export function RoGrowthWordmarkFooter({
   wordmark = "RoGrowth",
   legalName = "rogrowth.ro",
   year = 2026,
-  description = "Studio de design și dezvoltare web. București, România.",
-  email = "salut@rogrowth.ro",
+  description = "Studio de design și dezvoltare web.",
+  address = ROGROWTH_CONTACT.addressFull,
+  email = ROGROWTH_CONTACT.email,
+  phone = ROGROWTH_CONTACT.phoneDisplay,
+  phoneHref = ROGROWTH_CONTACT.phoneHref,
+  whatsappHref = ROGROWTH_CONTACT.whatsappHref,
   status, // Removed to avoid AI dashboard slop
   credit = { label: "București, România", href: "#" },
   onOpenLegalModal,
@@ -276,7 +330,11 @@ export function RoGrowthWordmarkFooter({
       legalName={legalName}
       year={year}
       description={description}
+      address={address}
       email={email}
+      phone={phone}
+      phoneHref={phoneHref}
+      whatsappHref={whatsappHref}
       status={status}
       credit={credit}
       columns={customColumns || defaultColumns}

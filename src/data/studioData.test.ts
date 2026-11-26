@@ -11,6 +11,7 @@ import {
   WORKSHOP_FAQ_ITEMS,
   BLOG_ARTICLES,
   TEAM_MEMBERS,
+  ROGROWTH_CONTACT,
 } from './studioData';
 import {
   resolveAppRoute,
@@ -204,6 +205,16 @@ test('Creare Site Web datasets and SEO/GEO JSON-LD schema match RoGrowth busines
   const schema = buildCreareSiteWebJsonLd('https://rogrowth.ro/creare-siteweb');
   assert.equal(schema['@context'], 'https://schema.org');
   assert.equal(schema['@graph'].length, 3);
+  const agencyNode = schema['@graph'][0] as {
+    telephone?: string;
+    address?: { streetAddress?: string; postalCode?: string };
+  };
+  assert.equal(agencyNode.telephone, '+40 751 402 062');
+  assert.equal(agencyNode.address?.streetAddress, 'Bulevardul Iuliu Maniu 220');
+  assert.equal(agencyNode.address?.postalCode, '061126');
+  assert.equal(ROGROWTH_CONTACT.whatsappHref, 'https://wa.me/40751402062');
+  assert.equal(ROGROWTH_CONTACT.phoneHref, 'tel:+40751402062');
+  assert.equal(ROGROWTH_CONTACT.addressFull, 'Bulevardul Iuliu Maniu 220, 061126 București');
 });
 
 import {

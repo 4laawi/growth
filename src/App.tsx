@@ -8,6 +8,7 @@ import {
   HiringNotification,
   PORTFOLIO_PROJECTS,
   PortfolioProject,
+  ROGROWTH_CONTACT,
   ServiceCardItem,
 } from './data/studioData';
 import { AppRoute, resolveAppRoute } from './design-system/tokens';
@@ -28,6 +29,7 @@ import {
   ProjectCaseModal,
   ServiceDetailModal,
 } from './components/StudioModals';
+import { WhatsAppIcon } from './components/StudioIcons';
 import { X } from 'lucide-react';
 
 export default function App() {
@@ -377,12 +379,24 @@ export default function App() {
             </h2>
             <p className="text-sm text-neutral-600 leading-relaxed">
               {legalModalType === 'terminos'
-                ? 'RoGrowth.ro (București, România) operează pe principii de transparență totală: 100% proprietatea clientului asupra domeniului, codului sursă și bazei de date la plata finală (fără vendor lock-in). Termeni standard: 30% avans / 70% la predare (sau 30% / 40% / 30% pentru proiecte mari), 2 runde structurate de revizii majore incluse și garanție tehnică post-lansare.'
+                ? `RoGrowth.ro (${ROGROWTH_CONTACT.addressFull}, România · ${ROGROWTH_CONTACT.phoneDisplay}) operează pe principii de transparență totală: 100% proprietatea clientului asupra domeniului, codului sursă și bazei de date la plata finală (fără vendor lock-in). Termeni standard: 30% avans / 70% la predare (sau 30% / 40% / 30% pentru proiecte mari), 2 runde structurate de revizii majore incluse și garanție tehnică post-lansare.`
                 : 'Respectăm confidențialitatea fiecărui antreprenor și IMM care ne contactează. Datele transmise prin formularul de ofertare sunt utilizate exclusiv pentru evaluarea nevoilor proiectului, recomandarea tehnică și întocmirea ofertei comerciale.'}
             </p>
           </div>
         </div>
       )}
+
+      {/* Floating WhatsApp Direct Button */}
+      <a
+        href={ROGROWTH_CONTACT.whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Contactează-ne pe WhatsApp (${ROGROWTH_CONTACT.phoneDisplay})`}
+        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 sm:py-2.5 text-xs font-semibold shadow-[0_10px_28px_rgba(5,150,105,0.28)] transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap"
+      >
+        <WhatsAppIcon className="w-4 h-4 shrink-0" />
+        <span className="hidden sm:inline">WhatsApp</span>
+      </a>
     </div>
   );
 }

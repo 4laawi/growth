@@ -344,7 +344,7 @@ export function FigmaFramerShowcaseSection({
 
                 {/* Handwritten / Script Annotation Row ("& Site web de prezentare") with curved arrow */}
                 <div className="flex items-center gap-1.5 -mt-1 mb-0.5 pl-1">
-                  <span className="font-serif italic text-[15px] sm:text-[18px] font-medium text-[#FF5522] dark:text-[#FF7849] tracking-tight">
+                  <span className="font-serif italic text-[15px] sm:text-[18px] font-medium text-[#0D5FF9] dark:text-[#7DD3FC] tracking-tight">
                     &amp; Site web de prezentare
                   </span>
                   <svg
@@ -353,7 +353,7 @@ export function FigmaFramerShowcaseSection({
                     viewBox="0 0 34 18"
                     fill="none"
                     aria-hidden="true"
-                    className="text-[#FF5522] dark:text-[#FF7849] -translate-y-1"
+                    className="text-[#0D5FF9] dark:text-[#7DD3FC] -translate-y-1"
                   >
                     <path
                       d="M2 14C10 15 22 11 30 3M30 3L23 3.5M30 3L29 9.5"
@@ -376,7 +376,7 @@ export function FigmaFramerShowcaseSection({
               >
                 <h2 className="text-[clamp(2.15rem,5vw,4.15rem)] font-extrabold tracking-[-0.04em] leading-[1.04] text-[#1D1B1A] dark:text-white">
                   care chiar{' '}
-                  <span className="relative inline-block font-serif italic font-normal text-[#FF5522] dark:text-[#FF7849]">
+                  <span className="relative inline-block font-serif italic font-normal text-[#0D5FF9] dark:text-[#7DD3FC]">
                     convertește
                     <svg
                       viewBox="0 0 210 16"
@@ -426,7 +426,7 @@ export function FigmaFramerShowcaseSection({
               >
                 <a
                   href={`#pick-two-configurator-${variant}`}
-                  className="px-7 py-3.5 rounded-full bg-[#FF5522] hover:bg-[#E04314] text-white text-[14px] font-bold tracking-tight shadow-[0_10px_25px_rgba(255,85,34,0.28)] transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap"
+                  className="px-7 py-3.5 rounded-full bg-[#0D5FF9] hover:bg-[#004AD9] text-white text-[14px] font-bold tracking-tight shadow-[0_10px_25px_rgba(13,95,249,0.28)] transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap"
                 >
                   Vezi Prețurile
                 </a>
@@ -452,7 +452,7 @@ export function FigmaFramerShowcaseSection({
 
                   <div className="flex flex-col">
                     <div
-                      className="flex items-center gap-0.5 text-[#FF5522]"
+                      className="flex items-center gap-0.5 text-[#0D5FF9] dark:text-[#7DD3FC]"
                       aria-label="Evaluare 5 din 5 stele pentru consistența livrării"
                     >
                       {Array.from({ length: 5 }).map((_, sIdx) => (
@@ -541,7 +541,7 @@ export function FigmaFramerShowcaseSection({
             href={
               variant === 'creare-site' ? '#referinte-portofoliu' : '#portfolio'
             }
-            className="px-6 py-3 rounded-full bg-[#FF5522] hover:bg-[#E04314] text-white text-xs font-bold tracking-tight shadow-[0_10px_24px_rgba(255,85,34,0.26)] transition-transform duration-200 hover:scale-105 whitespace-nowrap"
+            className="px-6 py-3 rounded-full bg-[#0D5FF9] hover:bg-[#004AD9] text-white text-xs font-bold tracking-tight shadow-[0_10px_24px_rgba(13,95,249,0.26)] transition-transform duration-200 hover:scale-105 whitespace-nowrap"
           >
             Vezi Proiectele Recente
           </a>
@@ -558,7 +558,7 @@ export function FigmaFramerShowcaseSection({
       >
         {/* Header with handwritten underline beneath "tale" */}
         <div className="text-center max-w-[650px] mx-auto mb-14">
-          <p className="text-xs font-mono-code uppercase tracking-widest text-[#FF5522] dark:text-[#FF7849] mb-3">
+          <p className="text-xs font-mono-code uppercase tracking-widest text-[#0D5FF9] dark:text-[#7DD3FC] mb-3">
             Prețuri Simple &amp; Flexibile
           </p>
           <h2 className="text-[clamp(2.1rem,4.4vw,3.4rem)] font-extrabold tracking-[-0.035em] leading-[1.08] text-[#141517] dark:text-white text-balance">
@@ -575,7 +575,7 @@ export function FigmaFramerShowcaseSection({
                 viewBox="0 0 60 10"
                 fill="none"
                 aria-hidden="true"
-                className="pointer-events-none absolute left-0 -bottom-1.5 w-full h-2.5 text-[#FF5522]"
+                className="pointer-events-none absolute left-0 -bottom-1.5 w-full h-2.5 text-[#0D5FF9] dark:text-[#7DD3FC]"
               >
                 <path
                   d="M2 7C18 2.5 42 2.5 58 6.5"
@@ -619,7 +619,7 @@ export function FigmaFramerShowcaseSection({
                       <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200 ${
                           isActive
-                            ? 'bg-[#FF5522]/12 text-[#FF5522]'
+                            ? 'bg-[#0D5FF9]/12 text-[#0D5FF9] dark:bg-[#0D5FF9]/20 dark:text-[#7DD3FC]'
                             : 'bg-neutral-100 dark:bg-white/10 text-neutral-400'
                         }`}
                       >
@@ -648,9 +648,9 @@ export function FigmaFramerShowcaseSection({
                         e.stopPropagation();
                         handleTogglePriority(option.id);
                       }}
-                      className={`relative inline-flex h-8 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5522] ${
+                      className={`relative inline-flex h-8 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0D5FF9] ${
                         isActive
-                          ? 'bg-[#FF5522]'
+                          ? 'bg-[#0D5FF9]'
                           : 'bg-neutral-200 dark:bg-white/15'
                       }`}
                     >
@@ -685,7 +685,7 @@ export function FigmaFramerShowcaseSection({
                   </span>
                 </h3>
 
-                <span className="text-[11px] font-mono-code font-semibold text-[#FF5522] bg-[#FF5522]/10 px-3 py-1 rounded-full whitespace-nowrap shrink-0">
+                <span className="text-[11px] font-mono-code font-semibold text-[#0D5FF9] bg-[#0D5FF9]/10 dark:text-[#7DD3FC] dark:bg-[#0D5FF9]/20 px-3 py-1 rounded-full whitespace-nowrap shrink-0">
                   {activePackage.badgeText}
                 </span>
               </div>
@@ -711,14 +711,14 @@ export function FigmaFramerShowcaseSection({
               {/* 4 Deliverable Rows (Turnaround, Revisions, Figma Logo, Framer Logo) */}
               <ul className="py-6 space-y-4">
                 <li className="flex items-center gap-3.5 text-[14px] font-medium text-[#141517] dark:text-neutral-100">
-                  <span className="w-7 h-7 rounded-lg bg-[#FF5522]/10 text-[#FF5522] flex items-center justify-center shrink-0">
+                  <span className="w-7 h-7 rounded-lg bg-[#0D5FF9]/10 text-[#0D5FF9] dark:bg-[#0D5FF9]/20 dark:text-[#7DD3FC] flex items-center justify-center shrink-0">
                     <Clock className="w-4 h-4" />
                   </span>
                   <span>{activePackage.turnaroundText}</span>
                 </li>
 
                 <li className="flex items-center gap-3.5 text-[14px] font-medium text-[#141517] dark:text-neutral-100">
-                  <span className="w-7 h-7 rounded-lg bg-[#FF5522]/10 text-[#FF5522] flex items-center justify-center shrink-0">
+                  <span className="w-7 h-7 rounded-lg bg-[#0D5FF9]/10 text-[#0D5FF9] dark:bg-[#0D5FF9]/20 dark:text-[#7DD3FC] flex items-center justify-center shrink-0">
                     <RefreshCw className="w-4 h-4" />
                   </span>
                   <span>{activePackage.revisionsText}</span>
@@ -749,7 +749,7 @@ export function FigmaFramerShowcaseSection({
               <button
                 type="button"
                 onClick={() => onOpenContact(activePackage.presetServiceOption)}
-                className="w-full py-3.5 px-6 rounded-full bg-[#FF5522] hover:bg-[#E04314] text-white text-[14px] font-bold tracking-tight shadow-[0_12px_28px_rgba(255,85,34,0.28)] transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3.5 px-6 rounded-full bg-[#0D5FF9] hover:bg-[#004AD9] text-white text-[14px] font-bold tracking-tight shadow-[0_12px_28px_rgba(13,95,249,0.28)] transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>{activePackage.ctaLabel}</span>
                 <ArrowRight className="w-4 h-4" />

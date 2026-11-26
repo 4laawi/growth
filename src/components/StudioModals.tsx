@@ -3,12 +3,13 @@ import {
   HIRING_NOTIFICATIONS,
   HiringNotification,
   PortfolioProject,
+  ROGROWTH_CONTACT,
   SERVICE_CARDS,
   ServiceCardItem,
   validateContactInquiry,
 } from '../data/studioData';
-import { OnlinesAvatarIcon } from './StudioIcons';
-import { X, CheckCircle2, ArrowUpRight, MapPin, Clock } from 'lucide-react';
+import { OnlinesAvatarIcon, WhatsAppIcon } from './StudioIcons';
+import { X, CheckCircle2, ArrowUpRight, MapPin, Clock, Phone } from 'lucide-react';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -257,21 +258,48 @@ export function ContactModal({
               <span>✓ 100% proprietatea ta</span>
             </div>
 
-            <div className="pt-2 flex items-center justify-end gap-3">
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-5 py-2.5 rounded-full text-xs font-semibold text-neutral-500 hover:text-[#141517] cursor-pointer"
-              >
-                Anulează
-              </button>
-              <button
-                type="submit"
-                className="px-8 py-3 rounded-full bg-[#0D5FF9] hover:bg-[#004AD9] text-white text-sm font-semibold shadow-[0_10px_25px_rgba(13,95,249,0.28)] transition-colors cursor-pointer"
-              >
-                Trimite cererea de ofertă
-              </button>
+            <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <a
+                  href={ROGROWTH_CONTACT.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Scrie pe WhatsApp la ${ROGROWTH_CONTACT.phoneDisplay}`}
+                  className="px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold inline-flex items-center gap-1.5 transition-colors whitespace-nowrap"
+                >
+                  <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
+                  <span>WhatsApp</span>
+                </a>
+                <a
+                  href={ROGROWTH_CONTACT.phoneHref}
+                  className="px-3.5 py-2.5 rounded-full border border-neutral-200 hover:border-neutral-300 text-xs font-semibold text-[#141517] inline-flex items-center gap-1.5 transition-colors tabular-nums whitespace-nowrap"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#0D5FF9] shrink-0" aria-hidden="true" />
+                  <span>{ROGROWTH_CONTACT.phoneDisplay}</span>
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2 ml-auto">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="px-4 py-2.5 rounded-full text-xs font-semibold text-neutral-500 hover:text-[#141517] cursor-pointer"
+                >
+                  Anulează
+                </button>
+                <button
+                  type="submit"
+                  className="px-7 py-3 rounded-full bg-[#0D5FF9] hover:bg-[#004AD9] text-white text-sm font-semibold shadow-[0_10px_25px_rgba(13,95,249,0.28)] transition-colors cursor-pointer"
+                >
+                  Trimite cererea de ofertă
+                </button>
+              </div>
             </div>
+
+            <p className="pt-1 text-[11px] text-neutral-400 flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+              <span>{ROGROWTH_CONTACT.addressFull}</span>
+            </p>
           </form>
         )}
       </div>

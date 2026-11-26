@@ -1,4 +1,4 @@
-import { ServiceCardItem, WorkshopFaqItem } from './studioData';
+import { ROGROWTH_CONTACT, ServiceCardItem, WorkshopFaqItem } from './studioData';
 
 export interface GuaranteeMetricItem {
   id: string;
@@ -617,14 +617,17 @@ export function buildCreareSiteWebJsonLd(canonicalUrl = 'https://rogrowth.ro/cre
         '@id': `${canonicalUrl}#agency`,
         name: 'RoGrowth — Agenție de Creare Site Web & Marketing Digital',
         url: canonicalUrl,
+        telephone: ROGROWTH_CONTACT.phoneDisplay,
         areaServed: [
           { '@type': 'City', name: 'București' },
           { '@type': 'Country', name: 'România' },
         ],
         address: {
           '@type': 'PostalAddress',
-          addressLocality: 'București',
-          addressCountry: 'RO',
+          streetAddress: ROGROWTH_CONTACT.streetAddress,
+          postalCode: ROGROWTH_CONTACT.postalCode,
+          addressLocality: ROGROWTH_CONTACT.addressLocality,
+          addressCountry: ROGROWTH_CONTACT.addressCountry,
         },
         priceRange: '€300 - €2300+',
         description:

@@ -275,7 +275,7 @@ export function ServicesSection({ onOpenServiceModal }: ServicesSectionProps) {
                 style={{ transform: 'scaleX(0.3)' }}
               />
               <p className="text-xs font-mono-code uppercase tracking-widest text-[#0D5FF9]">
-                Pachete Transparente · Fără Costuri Ascunse
+                Claritate &amp; Performanță Web
               </p>
               <span
                 ref={kickerLineRightRef}
@@ -363,14 +363,11 @@ export function ServicesSection({ onOpenServiceModal }: ServicesSectionProps) {
                 style={{ transform: 'scaleX(0)' }}
               />
             </div>
-            <a
-              href="#pachete-preturi"
-              className="text-[11.5px] font-mono-code text-neutral-400 hover:text-[#141517] transition-colors whitespace-nowrap"
-            >
+            <p className="text-[11.5px] font-mono-code text-neutral-400 whitespace-nowrap">
               {isComplete
-                ? 'Pachete & prețuri mai jos ↓'
+                ? 'Continuă să derulezi ↓'
                 : 'Derulează pentru a descoperi ↓'}
-            </a>
+            </p>
           </div>
         </div>
       </div>
@@ -385,10 +382,22 @@ export function PricingTablesSection({
     <section
       id="pachete-preturi"
       data-theme-section="true"
-      aria-label="Pachete și prețuri"
+      aria-labelledby="pricing-heading"
       className="bg-transparent py-20 lg:py-24 transition-colors duration-500 ease-out"
     >
       <div className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20">
+        <div className="mb-12">
+          <p className="text-xs font-mono-code uppercase tracking-widest text-[#0D5FF9] mb-2">
+            Pachete &amp; Prețuri
+          </p>
+          <h2
+            id="pricing-heading"
+            className="text-[clamp(2rem,4vw,3.3rem)] font-extrabold tracking-[-0.035em] leading-[1.06] text-[#141517]"
+          >
+            Pachete transparente, fără costuri ascunse
+          </h2>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7 items-stretch">
           {SERVICE_CARDS.map((card) => (
             <PricingTierCard

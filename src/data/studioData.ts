@@ -86,6 +86,19 @@ export interface ValidationResult {
   errors: Record<string, string>;
 }
 
+export const ROGROWTH_CONTACT = {
+  email: 'salut@rogrowth.ro',
+  phoneDisplay: '+40 751 402 062',
+  phoneHref: 'tel:+40751402062',
+  whatsappNumber: '40751402062',
+  whatsappHref: 'https://wa.me/40751402062',
+  addressFull: 'Bulevardul Iuliu Maniu 220, 061126 București',
+  streetAddress: 'Bulevardul Iuliu Maniu 220',
+  postalCode: '061126',
+  addressLocality: 'București',
+  addressCountry: 'RO',
+} as const;
+
 export const SERVICE_CARDS: ServiceCardItem[] = [
   {
     id: 'site-prezentare',
