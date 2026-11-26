@@ -15,8 +15,6 @@ import {
 interface HeroCanvasProps {
   onOpenContact: (presetService?: string) => void;
   onSelectProject: (projectId: string) => void;
-  onNavigateDesignSystem?: () => void;
-  onNavigateCreareSite?: () => void;
 }
 
 interface CustomComment {
@@ -29,8 +27,6 @@ interface CustomComment {
 export function HeroCanvas({
   onOpenContact,
   onSelectProject,
-  onNavigateDesignSystem,
-  onNavigateCreareSite,
 }: HeroCanvasProps) {
   const [aiMode, setAiMode] = useState(true);
   const [showGrid, setShowGrid] = useState(true);
@@ -346,26 +342,6 @@ export function HeroCanvas({
           <Sparkles className="w-3 h-3" />
           <span>IA</span>
         </button>
-        {onNavigateCreareSite && (
-          <button
-            type="button"
-            onClick={onNavigateCreareSite}
-            aria-label="Deschide pagina dedicată Creare Site Web"
-            className="px-3 h-8 rounded-full bg-[#0D5FF9] hover:bg-[#004AD9] text-white text-[11px] font-mono-code font-semibold transition-colors cursor-pointer whitespace-nowrap"
-          >
-            /creare-siteweb
-          </button>
-        )}
-        {onNavigateDesignSystem && (
-          <button
-            type="button"
-            onClick={onNavigateDesignSystem}
-            aria-label="Deschide Sistemul UI și Arhitectura de Componente"
-            className="px-3 h-8 rounded-full bg-neutral-100 hover:bg-[#0D5FF9] hover:text-white text-[#141517] text-[11px] font-mono-code font-semibold transition-colors cursor-pointer whitespace-nowrap"
-          >
-            Sistem UI
-          </button>
-        )}
       </div>
     </section>
   );

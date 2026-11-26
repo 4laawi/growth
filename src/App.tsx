@@ -154,7 +154,7 @@ export default function App() {
           {scrolled ? "'_" : 'rogrowth.ro'}
         </a>
 
-        {/* Zone 2: 5 concise single-line text navigation links */}
+        {/* Zone 2: 4 concise single-line text navigation links */}
         <nav
           aria-label="Navigare principală RoGrowth.ro"
           className={`hidden md:flex items-center gap-7 text-[13px] font-medium ${effectiveDarkMode ? 'text-neutral-400' : 'text-neutral-500'
@@ -189,14 +189,6 @@ export default function App() {
               }`}
           >
             Servicii
-          </a>
-          <a
-            href="#equipo"
-            onClick={(e) => handleSectionNavClick(e, 'equipo')}
-            className={`hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 ${effectiveDarkMode ? 'hover:text-white' : 'hover:text-[#141517]'
-              }`}
-          >
-            Echipă
           </a>
           <a
             href={currentRoute === '/creare-siteweb' ? '#referinte-portofoliu' : '#portfolio'}
@@ -271,8 +263,6 @@ export default function App() {
             <HeroCanvas
               onOpenContact={() => handleOpenContact()}
               onSelectProject={handleSelectProjectById}
-              onNavigateDesignSystem={() => navigateToRoute('/design-system')}
-              onNavigateCreareSite={() => navigateToRoute('/creare-siteweb')}
             />
 
             {/* 2. Scroll-Illuminated Manifesto */}

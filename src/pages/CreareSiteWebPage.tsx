@@ -1760,14 +1760,6 @@ export function CreareSiteWebPage({
           <Sparkles className="w-3 h-3" />
           <span>Studio</span>
         </button>
-        <button
-          type="button"
-          onClick={onNavigateDesignSystem}
-          aria-label="Deschide Sistemul UI"
-          className="px-3 h-8 rounded-full bg-neutral-100 hover:bg-[#0D5FF9] hover:text-white text-[#141517] text-[11px] font-mono-code font-semibold transition-colors cursor-pointer whitespace-nowrap"
-        >
-          Sistem UI
-        </button>
       </div>
     </div>
   );

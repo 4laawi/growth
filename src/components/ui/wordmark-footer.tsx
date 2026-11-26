@@ -282,7 +282,6 @@ export function RoGrowthWordmarkFooter({
       links: [
         { label: "Despre Noi", href: "#about" },
         { label: "Portofoliu", href: "#portfolio" },
-        { label: "Echipă", href: "#team" },
         { label: "Cariere", href: "#careers" },
         {
           label: "Sistem UI",
