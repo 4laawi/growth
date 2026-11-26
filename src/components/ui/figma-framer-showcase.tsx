@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   ArrowRight,
   Clock,
@@ -8,6 +8,7 @@ import {
   RefreshCw,
   Star,
 } from 'lucide-react';
+import { useSectionReveal } from './StudioPrimitives';
 
 export const FIGMA_LOGO_3D_SRC =
   '/assets/aistudio/image-removebg-preview__1__3bdc6261.webp';
@@ -229,31 +230,11 @@ export function FigmaFramerShowcaseSection({
   onSelectProjectById,
   variant = 'homepage',
 }: FigmaFramerShowcaseSectionProps) {
-  const cardRef = React.useRef<HTMLDivElement | null>(null);
-  const [isCardRevealed, setIsCardRevealed] = useState(false);
+  const { ref: cardRef, isRevealed: isCardRevealed } =
+    useSectionReveal<HTMLDivElement>();
   const [activePair, setActivePair] = useState<
     [PriorityOptionId, PriorityOptionId]
   >(['good', 'fast']);
-
-  // Trigger choreographed reveal when scrolled into viewport (matching 00:01–00:04 of reference video)
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setIsCardRevealed(true);
-          }
-        }
-      },
-      { threshold: 0.18 }
-    );
-
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
   const pairKey = getPriorityPairKey(activePair);
   const activePackage = PICK_TWO_PACKAGES[pairKey];
@@ -271,31 +252,31 @@ export function FigmaFramerShowcaseSection({
       }
       data-testid={`figma-framer-section-${variant}`}
       aria-label="Design în Figma și dezvoltare Framer & Next.js cu configurator de priorități"
-      className="relative py-20 md:py-28 bg-transparent overflow-hidden transition-colors duration-500 ease-out"
+      className="relative pt-4 pb-20 md:pt-6 md:pb-24 bg-transparent overflow-hidden transition-colors duration-500 ease-out"
     >
       {/* =====================================================================
           PART 1 — REVEALING TILTED CARD WITH FIGMA & FRAMER 3D SQUIRCLE LOGOS
       ===================================================================== */}
       <div className="max-w-[1160px] mx-auto px-6 md:px-10">
         <div className="relative flex flex-col items-center">
-          {/* The Tilted Warm-Editorial Reveal Container (Matches Video 00:01 -> 00:09) */}
+          {/* The Tilted Warm-Editorial Reveal Container */}
           <div
             ref={cardRef}
             data-testid="tilted-reveal-card"
             data-revealed={isCardRevealed ? 'true' : 'false'}
-            className={`relative w-full max-w-[920px] rounded-[28px] md:rounded-[34px] bg-[#F7F4EE] dark:bg-[#131418] border border-[#EBE5D9] dark:border-white/10 px-7 py-10 sm:px-12 sm:py-14 md:px-16 md:py-16 shadow-[0_24px_60px_-15px_rgba(20,21,23,0.07)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            className={`relative w-full max-w-[920px] rounded-[28px] md:rounded-[34px] bg-[#F7F4EE] dark:bg-[#131418] border border-[#EBE5D9] dark:border-white/10 px-7 py-10 sm:px-12 sm:py-14 md:px-16 md:py-16 shadow-[0_24px_60px_-15px_rgba(20,21,23,0.07)] will-change-[transform,opacity] transition-all duration-[850ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
               isCardRevealed
                 ? 'opacity-100 translate-y-0 rotate-[-1.15deg] hover:rotate-[-0.35deg] scale-100'
-                : 'opacity-80 translate-y-2 rotate-[-0.4deg] scale-[0.985]'
+                : 'opacity-0 translate-y-6 rotate-[0deg] scale-[0.975]'
             }`}
           >
             <div className="max-w-[760px]">
               {/* Staggered Line 1 + Overlapping Figma & Framer 3D Squircle Logos */}
               <div
-                className={`transition-all duration-700 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                className={`transition-all duration-700 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                   isCardRevealed
                     ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-5'
+                    : 'opacity-0 translate-y-4'
                 }`}
               >
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
@@ -312,10 +293,10 @@ export function FigmaFramerShowcaseSection({
                     aria-label="Logourile oficiale Figma și Framer"
                   >
                     <div
-                      className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 -rotate-6 transition-all duration-700 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:rotate-0 hover:scale-110 z-10 ${
+                      className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 -rotate-6 transition-all duration-700 delay-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:rotate-0 hover:scale-110 z-10 ${
                         isCardRevealed
                           ? 'opacity-100 scale-100 translate-y-0'
-                          : 'opacity-0 scale-50 translate-y-4'
+                          : 'opacity-0 scale-75 translate-y-3'
                       }`}
                     >
                       <img
@@ -326,10 +307,10 @@ export function FigmaFramerShowcaseSection({
                       />
                     </div>
                     <div
-                      className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 -ml-3 sm:-ml-3.5 rotate-12 transition-all duration-700 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:rotate-3 hover:scale-110 z-20 ${
+                      className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 -ml-3 sm:-ml-3.5 rotate-12 transition-all duration-700 delay-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:rotate-3 hover:scale-110 z-20 ${
                         isCardRevealed
                           ? 'opacity-100 scale-100 translate-y-0'
-                          : 'opacity-0 scale-50 translate-y-4'
+                          : 'opacity-0 scale-75 translate-y-3'
                       }`}
                     >
                       <img
@@ -368,10 +349,10 @@ export function FigmaFramerShowcaseSection({
 
               {/* Staggered Line 2: "care chiar convertește" with self-drawing double underline */}
               <div
-                className={`transition-all duration-700 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                className={`transition-all duration-700 delay-[180ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                   isCardRevealed
                     ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-5'
+                    : 'opacity-0 translate-y-4'
                 }`}
               >
                 <h2 className="text-[clamp(2.15rem,5vw,4.15rem)] font-extrabold tracking-[-0.04em] leading-[1.04] text-[#1D1B1A] dark:text-white">
@@ -382,7 +363,7 @@ export function FigmaFramerShowcaseSection({
                       viewBox="0 0 210 16"
                       fill="none"
                       aria-hidden="true"
-                      className={`pointer-events-none absolute left-0 -bottom-2 w-full h-3.5 origin-left transition-transform duration-700 delay-300 ease-out ${
+                      className={`pointer-events-none absolute left-0 -bottom-2 w-full h-3.5 origin-left transition-transform duration-700 delay-[360ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isCardRevealed ? 'scale-x-100' : 'scale-x-0'
                       }`}
                     >
@@ -405,10 +386,10 @@ export function FigmaFramerShowcaseSection({
 
               {/* Staggered Line 3: Subtitle */}
               <p
-                className={`mt-6 text-[15px] sm:text-[16.5px] text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[540px] transition-all duration-700 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                className={`mt-6 text-[15px] sm:text-[16.5px] text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[540px] transition-all duration-700 delay-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                   isCardRevealed
                     ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-4'
+                    : 'opacity-0 translate-y-3'
                 }`}
               >
                 Prețuri flexibile și scop adaptat nevoilor și priorităților tale
@@ -418,10 +399,10 @@ export function FigmaFramerShowcaseSection({
 
               {/* Staggered Line 4: CTA Button + Avatar Stack + 5 Stars */}
               <div
-                className={`mt-8 flex flex-wrap items-center gap-5 transition-all duration-700 delay-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                className={`mt-8 flex flex-wrap items-center gap-5 transition-all duration-700 delay-[340ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                   isCardRevealed
                     ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-4'
+                    : 'opacity-0 translate-y-3'
                 }`}
               >
                 <a

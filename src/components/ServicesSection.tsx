@@ -236,9 +236,9 @@ export function ServicesSection({ onOpenServiceModal }: ServicesSectionProps) {
         data-revealed-words={0}
         data-reveal-progress="0.000"
         data-total-words={TOTAL_WORDS}
-        className="relative h-[175vh] w-full border-t border-neutral-100"
+        className="relative h-[155vh] w-full border-t border-neutral-100"
       >
-        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center px-6 md:px-12 lg:px-20 overflow-hidden">
+        <div className="sticky top-0 h-[86vh] w-full flex flex-col items-center justify-center px-6 md:px-12 lg:px-20 overflow-hidden">
           {/* Featherlight Compositor Radial Aura (No GPU-heavy filter:blur) */}
           <div
             ref={ambientAuraRef}

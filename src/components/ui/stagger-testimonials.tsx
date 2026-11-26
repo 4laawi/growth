@@ -442,7 +442,7 @@ export function StaggerTestimonialsSection() {
             : 'translate3d(0, 20px, 0)',
           transition: `opacity 600ms ${ease}, transform 600ms ${ease}`,
         }}
-        className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-16 mb-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6"
+        className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-16 mb-10"
       >
         <SectionHeader
           id="impresii-heading"
@@ -450,10 +450,6 @@ export function StaggerTestimonialsSection() {
           title="Cum se simte colaborarea cu RoGrowth"
           description="Ce apreciază antreprenorii și echipele cu care discutăm: de la diagnosticul onest și prețul fix în scris până la predarea 100% a codului sursă."
         />
-
-        <p className="text-xs font-mono-code text-neutral-400 shrink-0">
-          Apasă pe orice card sau folosește săgețile ← →
-        </p>
       </div>
 
       <div
