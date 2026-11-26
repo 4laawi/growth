@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   SERVICE_CARDS,
   ServiceCardItem,
@@ -51,13 +51,10 @@ export function ServicesSection({ onOpenServiceModal }: ServicesSectionProps) {
   const ambientAuraRef = useRef<HTMLDivElement>(null);
   const kickerLineLeftRef = useRef<HTMLSpanElement>(null);
   const kickerLineRightRef = useRef<HTMLSpanElement>(null);
-  const progressBarRef = useRef<HTMLDivElement>(null);
 
   const wordSpanRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const wordUnderlineRefs = useRef<Record<number, HTMLSpanElement | null>>({});
   const subWordSpanRefs = useRef<(HTMLSpanElement | null)[]>([]);
-
-  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
     let rafId: number | null = null;
@@ -148,14 +145,6 @@ export function ServicesSection({ onOpenServiceModal }: ServicesSectionProps) {
         el.style.opacity = opacity.toFixed(3);
         el.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0)`;
       }
-
-      // 6. Bottom progress bar transform
-      if (progressBarRef.current) {
-        progressBarRef.current.style.transform = `scaleX(${progress.toFixed(4)})`;
-      }
-
-      const nextComplete = revealedCount >= TOTAL_WORDS;
-      setIsComplete((prev) => (prev === nextComplete ? prev : nextComplete));
     };
 
     const tick = () => {

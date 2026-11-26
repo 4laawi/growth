@@ -382,10 +382,9 @@ export default function App() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Contactează-ne pe WhatsApp (${ROGROWTH_CONTACT.phoneDisplay})`}
-        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 sm:py-2.5 text-xs font-semibold shadow-[0_10px_28px_rgba(5,150,105,0.28)] transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap"
+        className="fixed bottom-5 right-5 z-40 inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-[0_10px_28px_rgba(5,150,105,0.28)] transition-all duration-200 hover:-translate-y-0.5"
       >
-        <WhatsAppIcon className="w-4 h-4 shrink-0" />
-        <span className="hidden sm:inline">WhatsApp</span>
+        <WhatsAppIcon className="w-5 h-5 shrink-0" />
       </a>
     </div>
   );
